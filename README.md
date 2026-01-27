@@ -2,6 +2,16 @@
 > 
 > Zero setup. Zero maintenance. Just connect and automate.
 
+---
+
+### 🙏 Credits
+
+**Original Creator:** [@mastanley13](https://github.com/mastanley13) — Built the foundation for this MCP server.
+
+**Extended by:** [@BusyBee3333](https://github.com/BusyBee3333) — Expanded to 461+ tools covering the entire GHL API.
+
+---
+
 # 🚀 GoHighLevel MCP Server
 
 ## 💡 What This Unlocks
