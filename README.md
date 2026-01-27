@@ -184,7 +184,7 @@ mcporter call ghl-mcp search_contacts --params '{"query": "test"}'
 
 ---
 
-> **🔥 Transform Claude Desktop into a complete GoHighLevel CRM powerhouse with 269+ powerful tools across 19+ categories**
+> **🔥 Transform Claude Desktop into a complete GoHighLevel CRM powerhouse with 461+ powerful tools across 19+ categories**
 
 ## 🎯 What This Does
 
@@ -222,7 +222,7 @@ This comprehensive MCP (Model Context Protocol) server connects Claude Desktop d
 - ✅ Auto-deploy from GitHub
 - ✅ Built-in SSL
 
-## 🌟 Complete Tool Catalog (269 Tools)
+## 🌟 Complete Tool Catalog (461 Tools)
 
 ### 🎯 Contact Management (31 Tools)
 **Core Operations:**
@@ -844,7 +844,7 @@ This project is licensed under the **ISC License** - see the [LICENSE](LICENSE) 
 
 This comprehensive MCP server delivers:
 
-### ✅ **269 Operational Tools** across 19 categories
+### ✅ **461 Operational Tools** across 19 categories
 ### ✅ **Real-time GoHighLevel Integration** with full API coverage
 ### ✅ **Production-Ready Deployment** on multiple platforms
 ### ✅ **Enterprise-Grade Architecture** with comprehensive error handling
