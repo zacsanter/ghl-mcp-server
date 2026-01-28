@@ -83,7 +83,7 @@ This project was a 'time-taker' but I felt it was important. Feel free to donate
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/mastanley13/GoHighLevel-MCP)
 [![Donate to the Project](https://img.shields.io/badge/Donate_to_the_Project-💝_Support_Development-ff69b4?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/28E14o1hT7JAfstfvqdZ60y)
 
-> **🔥 Transform Claude Desktop into a complete GoHighLevel CRM powerhouse with 269+ powerful tools across 19+ categories**
+> **🔥 Transform Claude Desktop into a complete GoHighLevel CRM powerhouse with 461+ powerful tools across 38+ categories**
 
 ## 🎯 What This Does
 
@@ -121,7 +121,7 @@ This comprehensive MCP (Model Context Protocol) server connects Claude Desktop d
 - ✅ Auto-deploy from GitHub
 - ✅ Built-in SSL
 
-## 🌟 Complete Tool Catalog (269 Tools)
+## 🌟 Complete Tool Catalog (461 Tools)
 
 ### 🎯 Contact Management (31 Tools)
 **Core Operations:**
@@ -743,7 +743,7 @@ This project is licensed under the **ISC License** - see the [LICENSE](LICENSE) 
 
 This comprehensive MCP server delivers:
 
-### ✅ **269 Operational Tools** across 19 categories
+### ✅ **461 Operational Tools** across 38 categories
 ### ✅ **Real-time GoHighLevel Integration** with full API coverage
 ### ✅ **Production-Ready Deployment** on multiple platforms
 ### ✅ **Enterprise-Grade Architecture** with comprehensive error handling
