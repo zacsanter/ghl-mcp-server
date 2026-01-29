@@ -5,11 +5,13 @@
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { 
+import {
   CallToolRequestSchema,
   ErrorCode,
   ListToolsRequestSchema,
-  McpError 
+  ListResourcesRequestSchema,
+  ReadResourceRequestSchema,
+  McpError
 } from '@modelcontextprotocol/sdk/types.js';
 import * as dotenv from 'dotenv';
 
@@ -34,6 +36,28 @@ import { GHLConfig } from './types/ghl-types';
 import { ProductsTools } from './tools/products-tools.js';
 import { PaymentsTools } from './tools/payments-tools.js';
 import { InvoicesTools } from './tools/invoices-tools.js';
+// New tools
+import { FormsTools } from './tools/forms-tools.js';
+import { UsersTools } from './tools/users-tools.js';
+import { FunnelsTools } from './tools/funnels-tools.js';
+import { BusinessesTools } from './tools/businesses-tools.js';
+import { LinksTools } from './tools/links-tools.js';
+import { CompaniesTools } from './tools/companies-tools.js';
+import { SaasTools } from './tools/saas-tools.js';
+import { SnapshotsTools } from './tools/snapshots-tools.js';
+// Additional comprehensive tools
+import { CoursesTools } from './tools/courses-tools.js';
+import { CampaignsTools } from './tools/campaigns-tools.js';
+import { ReportingTools } from './tools/reporting-tools.js';
+import { OAuthTools } from './tools/oauth-tools.js';
+import { WebhooksTools } from './tools/webhooks-tools.js';
+import { PhoneTools } from './tools/phone-tools.js';
+import { ReputationTools } from './tools/reputation-tools.js';
+import { AffiliatesTools } from './tools/affiliates-tools.js';
+import { TemplatesTools } from './tools/templates-tools.js';
+import { SmartListsTools } from './tools/smartlists-tools.js';
+import { TriggersTools } from './tools/triggers-tools.js';
+import { MCPAppsManager } from './apps/index.js';
 
 // Load environment variables
 dotenv.config();
@@ -63,6 +87,28 @@ class GHLMCPServer {
   private productsTools: ProductsTools;
   private paymentsTools: PaymentsTools;
   private invoicesTools: InvoicesTools;
+  // New tools
+  private formsTools: FormsTools;
+  private usersTools: UsersTools;
+  private funnelsTools: FunnelsTools;
+  private businessesTools: BusinessesTools;
+  private linksTools: LinksTools;
+  private companiesTools: CompaniesTools;
+  private saasTools: SaasTools;
+  private snapshotsTools: SnapshotsTools;
+  // Additional comprehensive tools
+  private coursesTools: CoursesTools;
+  private campaignsTools: CampaignsTools;
+  private reportingTools: ReportingTools;
+  private oauthTools: OAuthTools;
+  private webhooksTools: WebhooksTools;
+  private phoneTools: PhoneTools;
+  private reputationTools: ReputationTools;
+  private affiliatesTools: AffiliatesTools;
+  private templatesTools: TemplatesTools;
+  private smartListsTools: SmartListsTools;
+  private triggersTools: TriggersTools;
+  private mcpAppsManager: MCPAppsManager;
 
   constructor() {
     // Initialize MCP server with capabilities
@@ -74,6 +120,7 @@ class GHLMCPServer {
       {
         capabilities: {
           tools: {},
+          resources: {},
         },
       }
     );
@@ -101,6 +148,30 @@ class GHLMCPServer {
     this.productsTools = new ProductsTools(this.ghlClient);
     this.paymentsTools = new PaymentsTools(this.ghlClient);
     this.invoicesTools = new InvoicesTools(this.ghlClient);
+    // New tools
+    this.formsTools = new FormsTools(this.ghlClient);
+    this.usersTools = new UsersTools(this.ghlClient);
+    this.funnelsTools = new FunnelsTools(this.ghlClient);
+    this.businessesTools = new BusinessesTools(this.ghlClient);
+    this.linksTools = new LinksTools(this.ghlClient);
+    this.companiesTools = new CompaniesTools(this.ghlClient);
+    this.saasTools = new SaasTools(this.ghlClient);
+    this.snapshotsTools = new SnapshotsTools(this.ghlClient);
+    // Additional comprehensive tools
+    this.coursesTools = new CoursesTools(this.ghlClient);
+    this.campaignsTools = new CampaignsTools(this.ghlClient);
+    this.reportingTools = new ReportingTools(this.ghlClient);
+    this.oauthTools = new OAuthTools(this.ghlClient);
+    this.webhooksTools = new WebhooksTools(this.ghlClient);
+    this.phoneTools = new PhoneTools(this.ghlClient);
+    this.reputationTools = new ReputationTools(this.ghlClient);
+    this.affiliatesTools = new AffiliatesTools(this.ghlClient);
+    this.templatesTools = new TemplatesTools(this.ghlClient);
+    this.smartListsTools = new SmartListsTools(this.ghlClient);
+    this.triggersTools = new TriggersTools(this.ghlClient);
+
+    // Initialize MCP Apps Manager for rich UI components
+    this.mcpAppsManager = new MCPAppsManager(this.ghlClient);
 
     // Setup MCP handlers
     this.setupHandlers();
@@ -139,6 +210,41 @@ class GHLMCPServer {
    * Setup MCP request handlers
    */
   private setupHandlers(): void {
+    // Handle list resources requests (for MCP Apps)
+    this.server.setRequestHandler(ListResourcesRequestSchema, async () => {
+      process.stderr.write('[GHL MCP] Listing resources...\n');
+      const resourceUris = this.mcpAppsManager.getResourceURIs();
+      return {
+        resources: resourceUris.map(uri => {
+          const handler = this.mcpAppsManager.getResourceHandler(uri);
+          return {
+            uri,
+            name: uri.replace('ui://ghl/', ''),
+            mimeType: handler?.mimeType || 'text/html;profile=mcp-app'
+          };
+        })
+      };
+    });
+
+    // Handle read resource requests (for MCP Apps)
+    this.server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+      const { uri } = request.params;
+      process.stderr.write(`[GHL MCP] Reading resource: ${uri}\n`);
+
+      const handler = this.mcpAppsManager.getResourceHandler(uri);
+      if (!handler) {
+        throw new McpError(ErrorCode.InvalidRequest, `Resource not found: ${uri}`);
+      }
+
+      return {
+        contents: [{
+          uri,
+          mimeType: handler.mimeType,
+          text: handler.getContent()
+        }]
+      };
+    });
+
     // Handle list tools requests
     this.server.setRequestHandler(ListToolsRequestSchema, async () => {
       process.stderr.write('[GHL MCP] Listing available tools...\n');
@@ -163,7 +269,29 @@ class GHLMCPServer {
         const productsToolDefinitions = this.productsTools.getTools();
         const paymentsToolDefinitions = this.paymentsTools.getTools();
         const invoicesToolDefinitions = this.invoicesTools.getTools();
-        
+        // New tools
+        const formsToolDefinitions = this.formsTools.getToolDefinitions();
+        const usersToolDefinitions = this.usersTools.getToolDefinitions();
+        const funnelsToolDefinitions = this.funnelsTools.getToolDefinitions();
+        const businessesToolDefinitions = this.businessesTools.getToolDefinitions();
+        const linksToolDefinitions = this.linksTools.getToolDefinitions();
+        const companiesToolDefinitions = this.companiesTools.getToolDefinitions();
+        const saasToolDefinitions = this.saasTools.getToolDefinitions();
+        const snapshotsToolDefinitions = this.snapshotsTools.getToolDefinitions();
+        // Additional comprehensive tools
+        const coursesToolDefinitions = this.coursesTools.getToolDefinitions();
+        const campaignsToolDefinitions = this.campaignsTools.getToolDefinitions();
+        const reportingToolDefinitions = this.reportingTools.getToolDefinitions();
+        const oauthToolDefinitions = this.oauthTools.getToolDefinitions();
+        const webhooksToolDefinitions = this.webhooksTools.getToolDefinitions();
+        const phoneToolDefinitions = this.phoneTools.getToolDefinitions();
+        const reputationToolDefinitions = this.reputationTools.getToolDefinitions();
+        const affiliatesToolDefinitions = this.affiliatesTools.getToolDefinitions();
+        const templatesToolDefinitions = this.templatesTools.getToolDefinitions();
+        const smartListsToolDefinitions = this.smartListsTools.getToolDefinitions();
+        const triggersToolDefinitions = this.triggersTools.getToolDefinitions();
+        const appToolDefinitions = this.mcpAppsManager.getToolDefinitions();
+
         const allTools = [
           ...contactToolDefinitions,
           ...conversationToolDefinitions,
@@ -183,7 +311,30 @@ class GHLMCPServer {
           ...storeToolDefinitions,
           ...productsToolDefinitions,
           ...paymentsToolDefinitions,
-          ...invoicesToolDefinitions
+          ...invoicesToolDefinitions,
+          // New tools
+          ...formsToolDefinitions,
+          ...usersToolDefinitions,
+          ...funnelsToolDefinitions,
+          ...businessesToolDefinitions,
+          ...linksToolDefinitions,
+          ...companiesToolDefinitions,
+          ...saasToolDefinitions,
+          ...snapshotsToolDefinitions,
+          // Additional comprehensive tools
+          ...coursesToolDefinitions,
+          ...campaignsToolDefinitions,
+          ...reportingToolDefinitions,
+          ...oauthToolDefinitions,
+          ...webhooksToolDefinitions,
+          ...phoneToolDefinitions,
+          ...reputationToolDefinitions,
+          ...affiliatesToolDefinitions,
+          ...templatesToolDefinitions,
+          ...smartListsToolDefinitions,
+          ...triggersToolDefinitions,
+          // MCP Apps (rich UI components)
+          ...appToolDefinitions
         ];
         
         process.stderr.write(`[GHL MCP] Registered ${allTools.length} tools total:\n`);
@@ -206,7 +357,29 @@ class GHLMCPServer {
         process.stderr.write(`[GHL MCP] - ${productsToolDefinitions.length} products tools\n`);
         process.stderr.write(`[GHL MCP] - ${paymentsToolDefinitions.length} payments tools\n`);
         process.stderr.write(`[GHL MCP] - ${invoicesToolDefinitions.length} invoices tools\n`);
-        
+        // New tools logging
+        process.stderr.write(`[GHL MCP] - ${formsToolDefinitions.length} forms tools\n`);
+        process.stderr.write(`[GHL MCP] - ${usersToolDefinitions.length} users tools\n`);
+        process.stderr.write(`[GHL MCP] - ${funnelsToolDefinitions.length} funnels tools\n`);
+        process.stderr.write(`[GHL MCP] - ${businessesToolDefinitions.length} businesses tools\n`);
+        process.stderr.write(`[GHL MCP] - ${linksToolDefinitions.length} links tools\n`);
+        process.stderr.write(`[GHL MCP] - ${companiesToolDefinitions.length} companies tools\n`);
+        process.stderr.write(`[GHL MCP] - ${saasToolDefinitions.length} saas tools\n`);
+        process.stderr.write(`[GHL MCP] - ${snapshotsToolDefinitions.length} snapshots tools\n`);
+        // Additional comprehensive tools logging
+        process.stderr.write(`[GHL MCP] - ${coursesToolDefinitions.length} courses tools\n`);
+        process.stderr.write(`[GHL MCP] - ${campaignsToolDefinitions.length} campaigns tools\n`);
+        process.stderr.write(`[GHL MCP] - ${reportingToolDefinitions.length} reporting tools\n`);
+        process.stderr.write(`[GHL MCP] - ${oauthToolDefinitions.length} oauth tools\n`);
+        process.stderr.write(`[GHL MCP] - ${webhooksToolDefinitions.length} webhooks tools\n`);
+        process.stderr.write(`[GHL MCP] - ${phoneToolDefinitions.length} phone tools\n`);
+        process.stderr.write(`[GHL MCP] - ${reputationToolDefinitions.length} reputation tools\n`);
+        process.stderr.write(`[GHL MCP] - ${affiliatesToolDefinitions.length} affiliates tools\n`);
+        process.stderr.write(`[GHL MCP] - ${templatesToolDefinitions.length} templates tools\n`);
+        process.stderr.write(`[GHL MCP] - ${smartListsToolDefinitions.length} smart lists tools\n`);
+        process.stderr.write(`[GHL MCP] - ${triggersToolDefinitions.length} triggers tools\n`);
+        process.stderr.write(`[GHL MCP] - ${appToolDefinitions.length} MCP App tools (rich UI)\n`);
+
         return {
           tools: allTools
         };
@@ -228,6 +401,13 @@ class GHLMCPServer {
 
       try {
         let result: any;
+
+        // Check if this is an MCP App tool (returns structuredContent)
+        if (this.mcpAppsManager.isAppTool(name)) {
+          const appResult = await this.mcpAppsManager.executeTool(name, args || {});
+          process.stderr.write(`[GHL MCP] App tool ${name} executed successfully\n`);
+          return appResult;
+        }
 
         // Route to appropriate tool handler
         if (this.isContactTool(name)) {
@@ -268,6 +448,46 @@ class GHLMCPServer {
           result = await this.paymentsTools.handleToolCall(name, args || {});
         } else if (this.isInvoicesTool(name)) {
           result = await this.invoicesTools.handleToolCall(name, args || {});
+        // New tools
+        } else if (this.isFormsTool(name)) {
+          result = await this.formsTools.handleToolCall(name, args || {});
+        } else if (this.isUsersTool(name)) {
+          result = await this.usersTools.handleToolCall(name, args || {});
+        } else if (this.isFunnelsTool(name)) {
+          result = await this.funnelsTools.handleToolCall(name, args || {});
+        } else if (this.isBusinessesTool(name)) {
+          result = await this.businessesTools.handleToolCall(name, args || {});
+        } else if (this.isLinksTool(name)) {
+          result = await this.linksTools.handleToolCall(name, args || {});
+        } else if (this.isCompaniesTool(name)) {
+          result = await this.companiesTools.handleToolCall(name, args || {});
+        } else if (this.isSaasTool(name)) {
+          result = await this.saasTools.handleToolCall(name, args || {});
+        } else if (this.isSnapshotsTool(name)) {
+          result = await this.snapshotsTools.handleToolCall(name, args || {});
+        // Additional comprehensive tools
+        } else if (this.isCoursesTool(name)) {
+          result = await this.coursesTools.handleToolCall(name, args || {});
+        } else if (this.isCampaignsTool(name)) {
+          result = await this.campaignsTools.handleToolCall(name, args || {});
+        } else if (this.isReportingTool(name)) {
+          result = await this.reportingTools.handleToolCall(name, args || {});
+        } else if (this.isOAuthTool(name)) {
+          result = await this.oauthTools.handleToolCall(name, args || {});
+        } else if (this.isWebhooksTool(name)) {
+          result = await this.webhooksTools.handleToolCall(name, args || {});
+        } else if (this.isPhoneTool(name)) {
+          result = await this.phoneTools.handleToolCall(name, args || {});
+        } else if (this.isReputationTool(name)) {
+          result = await this.reputationTools.handleToolCall(name, args || {});
+        } else if (this.isAffiliatesTool(name)) {
+          result = await this.affiliatesTools.handleToolCall(name, args || {});
+        } else if (this.isTemplatesTool(name)) {
+          result = await this.templatesTools.handleToolCall(name, args || {});
+        } else if (this.isSmartListsTool(name)) {
+          result = await this.smartListsTools.handleToolCall(name, args || {});
+        } else if (this.isTriggersTool(name)) {
+          result = await this.triggersTools.handleToolCall(name, args || {});
         } else {
           throw new Error(`Unknown tool: ${name}`);
         }
@@ -598,7 +818,219 @@ class GHLMCPServer {
     return invoicesToolNames.includes(toolName);
   }
 
+  /**
+   * Check if tool name belongs to forms tools
+   */
+  private isFormsTool(toolName: string): boolean {
+    const formsToolNames = ['get_forms', 'get_form_submissions', 'get_form_by_id'];
+    return formsToolNames.includes(toolName);
+  }
 
+  /**
+   * Check if tool name belongs to users tools
+   */
+  private isUsersTool(toolName: string): boolean {
+    const usersToolNames = ['get_users', 'get_user', 'create_user', 'update_user', 'delete_user', 'search_users'];
+    return usersToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to funnels tools
+   */
+  private isFunnelsTool(toolName: string): boolean {
+    const funnelsToolNames = [
+      'get_funnels', 'get_funnel', 'get_funnel_pages', 'count_funnel_pages',
+      'create_funnel_redirect', 'update_funnel_redirect', 'delete_funnel_redirect', 'get_funnel_redirects'
+    ];
+    return funnelsToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to businesses tools
+   */
+  private isBusinessesTool(toolName: string): boolean {
+    const businessesToolNames = ['get_businesses', 'get_business', 'create_business', 'update_business', 'delete_business'];
+    return businessesToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to links tools
+   */
+  private isLinksTool(toolName: string): boolean {
+    const linksToolNames = ['get_links', 'get_link', 'create_link', 'update_link', 'delete_link'];
+    return linksToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to companies tools
+   */
+  private isCompaniesTool(toolName: string): boolean {
+    const companiesToolNames = ['get_companies', 'get_company', 'create_company', 'update_company', 'delete_company'];
+    return companiesToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to saas tools
+   */
+  private isSaasTool(toolName: string): boolean {
+    const saasToolNames = [
+      'get_saas_locations', 'get_saas_location', 'update_saas_subscription',
+      'pause_saas_location', 'enable_saas_location', 'rebilling_update'
+    ];
+    return saasToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to snapshots tools
+   */
+  private isSnapshotsTool(toolName: string): boolean {
+    const snapshotsToolNames = [
+      'get_snapshots', 'get_snapshot', 'create_snapshot',
+      'get_snapshot_push_status', 'get_latest_snapshot_push', 'push_snapshot_to_subaccounts'
+    ];
+    return snapshotsToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to courses tools
+   */
+  private isCoursesTool(toolName: string): boolean {
+    const coursesToolNames = [
+      'get_courses', 'get_course', 'create_course', 'update_course', 'delete_course',
+      'publish_course', 'unpublish_course', 'get_course_products', 'get_course_offers',
+      'create_course_offer', 'update_course_offer', 'delete_course_offer',
+      'get_course_instructors', 'add_course_instructor', 'remove_course_instructor',
+      'get_course_categories', 'create_course_category', 'update_course_category', 'delete_course_category',
+      'get_course_lessons', 'get_course_lesson', 'create_course_lesson', 'update_course_lesson', 'delete_course_lesson',
+      'reorder_lessons', 'get_course_students', 'enroll_student', 'unenroll_student',
+      'get_student_progress', 'update_student_progress', 'reset_student_progress',
+      'complete_lesson', 'uncomplete_lesson'
+    ];
+    return coursesToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to campaigns tools
+   */
+  private isCampaignsTool(toolName: string): boolean {
+    const campaignsToolNames = [
+      'get_campaigns', 'get_campaign', 'create_campaign', 'update_campaign', 'delete_campaign',
+      'get_campaign_stats', 'get_campaign_contacts', 'add_campaign_contacts', 'remove_campaign_contacts',
+      'pause_campaign', 'resume_campaign'
+    ];
+    return campaignsToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to reporting tools
+   */
+  private isReportingTool(toolName: string): boolean {
+    const reportingToolNames = [
+      'get_dashboard_stats', 'get_conversion_report', 'get_attribution_report',
+      'get_call_report', 'get_appointment_report', 'get_email_report', 'get_sms_report',
+      'get_pipeline_report', 'get_revenue_report', 'get_ad_report'
+    ];
+    return reportingToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to oauth tools
+   */
+  private isOAuthTool(toolName: string): boolean {
+    const oauthToolNames = [
+      'get_installed_locations', 'get_location_access_token', 'generate_location_token',
+      'refresh_access_token', 'get_oauth_config', 'get_token_info'
+    ];
+    return oauthToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to webhooks tools
+   */
+  private isWebhooksTool(toolName: string): boolean {
+    const webhooksToolNames = [
+      'get_webhooks', 'get_webhook', 'create_webhook', 'update_webhook', 'delete_webhook',
+      'get_webhook_events', 'test_webhook'
+    ];
+    return webhooksToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to phone tools
+   */
+  private isPhoneTool(toolName: string): boolean {
+    const phoneToolNames = [
+      'get_phone_numbers', 'get_phone_number', 'search_available_numbers', 'purchase_phone_number',
+      'update_phone_number', 'release_phone_number', 'get_call_forwarding_settings', 'update_call_forwarding',
+      'get_ivr_menus', 'create_ivr_menu', 'update_ivr_menu', 'delete_ivr_menu',
+      'get_voicemail_settings', 'update_voicemail_settings', 'get_voicemails', 'delete_voicemail',
+      'get_caller_ids', 'add_caller_id', 'verify_caller_id', 'delete_caller_id'
+    ];
+    return phoneToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to reputation tools
+   */
+  private isReputationTool(toolName: string): boolean {
+    const reputationToolNames = [
+      'get_reviews', 'get_review', 'reply_to_review', 'update_review_reply', 'delete_review_reply',
+      'get_review_stats', 'send_review_request', 'get_review_requests',
+      'get_connected_review_platforms', 'connect_google_business', 'disconnect_review_platform',
+      'get_review_links', 'update_review_links', 'get_review_widget_settings', 'update_review_widget_settings'
+    ];
+    return reputationToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to affiliates tools
+   */
+  private isAffiliatesTool(toolName: string): boolean {
+    const affiliatesToolNames = [
+      'get_affiliate_campaigns', 'get_affiliate_campaign', 'create_affiliate_campaign',
+      'update_affiliate_campaign', 'delete_affiliate_campaign',
+      'get_affiliates', 'get_affiliate', 'create_affiliate', 'update_affiliate',
+      'approve_affiliate', 'reject_affiliate', 'delete_affiliate',
+      'get_affiliate_commissions', 'get_affiliate_stats', 'create_payout', 'get_payouts', 'get_referrals'
+    ];
+    return affiliatesToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to templates tools
+   */
+  private isTemplatesTool(toolName: string): boolean {
+    const templatesToolNames = [
+      'get_sms_templates', 'get_sms_template', 'create_sms_template', 'update_sms_template', 'delete_sms_template',
+      'get_voicemail_templates', 'create_voicemail_template', 'delete_voicemail_template',
+      'get_social_templates', 'create_social_template', 'delete_social_template',
+      'get_whatsapp_templates', 'create_whatsapp_template', 'delete_whatsapp_template',
+      'get_snippets', 'create_snippet', 'update_snippet', 'delete_snippet'
+    ];
+    return templatesToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to smart lists tools
+   */
+  private isSmartListsTool(toolName: string): boolean {
+    const smartListsToolNames = [
+      'get_smart_lists', 'get_smart_list', 'create_smart_list', 'update_smart_list', 'delete_smart_list',
+      'get_smart_list_contacts', 'get_smart_list_count', 'duplicate_smart_list'
+    ];
+    return smartListsToolNames.includes(toolName);
+  }
+
+  /**
+   * Check if tool name belongs to triggers tools
+   */
+  private isTriggersTool(toolName: string): boolean {
+    const triggersToolNames = [
+      'get_triggers', 'get_trigger', 'create_trigger', 'update_trigger', 'delete_trigger',
+      'enable_trigger', 'disable_trigger', 'get_trigger_types', 'get_trigger_logs', 'test_trigger', 'duplicate_trigger'
+    ];
+    return triggersToolNames.includes(toolName);
+  }
 
   /**
    * Test GHL API connection
