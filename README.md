@@ -1,9 +1,87 @@
+<<<<<<< HEAD
 **Instead of trying to tackle this ---- use our hosted version --- GHL Agent Framework, One Click to Sign in!**
 
 https://www.strategixagents.com/
 
 # 🚀 GoHighLevel MCP Server
 
+=======
+> **🚀 Don't want to self-host?** [Join the waitlist for our fully managed solution →](https://mcp.localbosses.org)
+> 
+> Zero setup. Zero maintenance. Just connect and automate.
+
+---
+
+### 🙏 Credits
+
+**Original Creator:** [@mastanley13](https://github.com/mastanley13) — Built the foundation for this MCP server.
+
+**Extended by:** [@BusyBee3333](https://github.com/BusyBee3333) — Expanded to 461+ tools covering the entire GHL API.
+
+---
+
+# 🚀 GoHighLevel MCP Server
+
+## 💡 What This Unlocks
+
+**This MCP server gives AI direct access to your entire GoHighLevel CRM.** Instead of clicking through menus, you just *tell* it what you want.
+
+### 🎯 GHL-Native Power Moves
+
+| Just say... | What happens |
+|-------------|--------------|
+| *"Find everyone who filled out a form this week but hasn't been contacted"* | Searches contacts, filters by source and last activity, returns a ready-to-call list |
+| *"Create an opportunity for John Smith, $15k deal, add to Enterprise pipeline"* | Creates the opp, assigns pipeline stage, links to contact — done |
+| *"Schedule a discovery call with Sarah for Tuesday 2pm and send her a confirmation"* | Checks calendar availability, books the slot, fires off an SMS |
+| *"Draft a blog post about our new service and schedule it for Friday"* | Creates the post in your GHL blog, SEO-ready, scheduled to publish |
+| *"Send a payment link for Invoice #1042 to the client via text"* | Generates text2pay link, sends SMS with payment URL |
+
+### 🔗 The Real Power: Combining Tools
+
+When you pair this MCP with other tools (web search, email, spreadsheets, Slack, etc.), things get *wild*:
+
+| Combo | What you can build |
+|-------|-------------------|
+| **GHL + Calendar + SMS** | "Every morning, text me a summary of today's appointments and any leads that went cold" |
+| **GHL + Web Search + Email** | "Research this prospect's company, then draft a personalized outreach email and add them as a contact" |
+| **GHL + Slack + Opportunities** | "When a deal closes, post a celebration to #wins with the deal value and rep name" |
+| **GHL + Spreadsheet + Invoices** | "Import this CSV of clients, create contacts, and generate invoices for each one" |
+| **GHL + AI + Conversations** | "Analyze the last 50 customer conversations and tell me what objections keep coming up" |
+
+> **This isn't just API access — it's your CRM on autopilot, controlled by natural language.**
+
+---
+
+## 🎁 Don't Want to Self-Host? We've Got You.
+
+**Not everyone wants to manage servers, deal with API keys, or troubleshoot deployments.** We get it.
+
+👉 **[Join the waitlist for our fully managed solution](https://mcp.localbosses.org)**
+
+**What you get:**
+- ✅ **Zero setup** — We handle everything
+- ✅ **Always up-to-date** — Latest features and security patches automatically
+- ✅ **Priority support** — Real humans who know GHL and AI
+- ✅ **Enterprise-grade reliability** — 99.9% uptime, monitored 24/7
+
+**Perfect for:**
+- Agencies who want to focus on clients, not infrastructure
+- Teams without dedicated DevOps resources
+- Anyone who values their time over tinkering with configs
+
+<p align="center">
+  <a href="https://mcp.localbosses.org">
+    <img src="https://img.shields.io/badge/Join_Waitlist-Get_Early_Access-0ea5e9?style=for-the-badge&logo=rocket&logoColor=white" alt="Join Waitlist">
+  </a>
+</p>
+
+---
+
+*Prefer to self-host? Keep reading below for the full open-source setup guide.*
+
+---
+
+>>>>>>> 422de92c1c7a69e2ca2b7045d9142636bc3e321d
 ## 🚨 **IMPORTANT: FOUNDATIONAL PROJECT NOTICE** 
 
 > **⚠️ This is a BASE-LEVEL foundational project designed to connect the GoHighLevel community with AI automation through MCP (Model Context Protocol).**
@@ -83,7 +161,53 @@ This project was a 'time-taker' but I felt it was important. Feel free to donate
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/mastanley13/GoHighLevel-MCP)
 [![Donate to the Project](https://img.shields.io/badge/Donate_to_the_Project-💝_Support_Development-ff69b4?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/28E14o1hT7JAfstfvqdZ60y)
 
+<<<<<<< HEAD
 > **🔥 Transform Claude Desktop into a complete GoHighLevel CRM powerhouse with 461+ powerful tools across 38+ categories**
+=======
+---
+
+### 🤖 Recommended Setup Options
+
+#### Option 1: Clawdbot (Easiest — Full AI Assistant)
+
+**[Clawdbot](https://clawd.bot)** is the easiest way to run this MCP server. It's an AI assistant platform that handles all the MCP configuration, environment setup, and integration automatically.
+
+**Why Clawdbot?**
+- ✅ **Zero-config MCP setup** — Just add your GHL API key and go
+- ✅ **Multi-channel AI** — Use your GHL tools via Discord, Slack, iMessage, WhatsApp, and more
+- ✅ **Built-in automation** — Schedule tasks, create workflows, and chain tools together
+- ✅ **Always-on assistant** — Runs 24/7 so your GHL automation never sleeps
+
+**Quick start:**
+```bash
+npm install -g clawdbot
+clawdbot init
+clawdbot config set skills.entries.ghl-mcp.apiKey "your_private_integrations_key"
+```
+
+Learn more at [docs.clawd.bot](https://docs.clawd.bot) or join the [community Discord](https://discord.com/invite/clawd).
+
+#### Option 2: mcporter (Lightweight CLI)
+
+**[mcporter](https://github.com/cyanheads/mcporter)** is a lightweight CLI tool for managing and calling MCP servers directly from the command line. Perfect if you want to test tools, debug integrations, or build your own automation scripts.
+
+**Why mcporter?**
+- ✅ **Direct MCP access** — Call any MCP tool from the terminal
+- ✅ **Config management** — Easy server setup and auth handling
+- ✅ **Great for scripting** — Pipe MCP tools into shell scripts and automations
+- ✅ **Debugging friendly** — Inspect requests/responses in real-time
+
+**Quick start:**
+```bash
+npm install -g mcporter
+mcporter config add ghl-mcp --transport stdio --command "node /path/to/ghl-mcp-server/dist/server.js"
+mcporter call ghl-mcp search_contacts --params '{"query": "test"}'
+```
+
+---
+
+> **🔥 Transform Claude Desktop into a complete GoHighLevel CRM powerhouse with 461+ powerful tools across 19+ categories**
+>>>>>>> 422de92c1c7a69e2ca2b7045d9142636bc3e321d
 
 ## 🎯 What This Does
 
@@ -743,7 +867,11 @@ This project is licensed under the **ISC License** - see the [LICENSE](LICENSE) 
 
 This comprehensive MCP server delivers:
 
+<<<<<<< HEAD
 ### ✅ **461 Operational Tools** across 38 categories
+=======
+### ✅ **461 Operational Tools** across 19 categories
+>>>>>>> 422de92c1c7a69e2ca2b7045d9142636bc3e321d
 ### ✅ **Real-time GoHighLevel Integration** with full API coverage
 ### ✅ **Production-Ready Deployment** on multiple platforms
 ### ✅ **Enterprise-Grade Architecture** with comprehensive error handling

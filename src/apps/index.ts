@@ -11,15 +11,7 @@ import { fileURLToPath } from 'url';
 
 export interface AppToolResult {
   content: Array<{ type: 'text'; text: string }>;
-  structuredContent?: {
-    type: 'resource';
-    resource: {
-      uri: string;
-      mimeType: string;
-      text?: string;
-      blob?: string;
-    };
-  };
+  structuredContent?: Record<string, unknown>;
   [key: string]: unknown;
 }
 
@@ -33,21 +25,22 @@ export interface AppResourceHandler {
  * MCP Apps Manager class
  * Registers app tools and handles structuredContent responses
  */
-// Note: We use process.cwd() based path resolution to find UI dist
-// This works when running from the project root directory
+// Resolve UI build path - works regardless of working directory
 function getUIBuildPath(): string {
-  // First try dist/app-ui (where MCP Apps are built)
+  // When compiled, this file is at dist/apps/index.js
+  // UI files are at dist/app-ui/
+  // Use __dirname which is available in CommonJS
+  const fromDist = path.resolve(__dirname, '..', 'app-ui');
+  if (fs.existsSync(fromDist)) {
+    return fromDist;
+  }
+  // Fallback: try process.cwd() based paths
   const appUiPath = path.join(process.cwd(), 'dist', 'app-ui');
   if (fs.existsSync(appUiPath)) {
     return appUiPath;
   }
-  // Fallback to src/ui/dist for legacy UI components
-  const fromCwd = path.join(process.cwd(), 'src', 'ui', 'dist');
-  if (fs.existsSync(fromCwd)) {
-    return fromCwd;
-  }
   // Default fallback
-  return appUiPath;
+  return fromDist;
 }
 
 export class MCPAppsManager {
@@ -306,6 +299,22 @@ export class MCPAppsManager {
         _meta: {
           ui: { resourceUri: 'ui://ghl/mcp-app' }
         }
+      },
+      // 12. Update Opportunity - action tool for UI to update opportunities
+      {
+        name: 'update_opportunity',
+        description: 'Update an opportunity (move to stage, change value, status, etc.)',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            opportunityId: { type: 'string', description: 'Opportunity ID to update' },
+            pipelineStageId: { type: 'string', description: 'New stage ID (for moving)' },
+            name: { type: 'string', description: 'Opportunity name' },
+            monetaryValue: { type: 'number', description: 'Monetary value' },
+            status: { type: 'string', enum: ['open', 'won', 'lost', 'abandoned'], description: 'Opportunity status' }
+          },
+          required: ['opportunityId']
+        }
       }
     ];
   }
@@ -325,7 +334,8 @@ export class MCPAppsManager {
       'view_agent_stats',
       'view_contact_timeline',
       'view_workflow_status',
-      'view_dashboard'
+      'view_dashboard',
+      'update_opportunity'
     ];
   }
 
@@ -365,6 +375,14 @@ export class MCPAppsManager {
         return await this.viewWorkflowStatus(args.workflowId);
       case 'view_dashboard':
         return await this.viewDashboard();
+      case 'update_opportunity':
+        return await this.updateOpportunity(args as {
+          opportunityId: string;
+          pipelineStageId?: string;
+          name?: string;
+          monetaryValue?: number;
+          status?: 'open' | 'won' | 'lost' | 'abandoned';
+        });
       default:
         throw new Error(`Unknown app tool: ${toolName}`);
     }
@@ -415,9 +433,26 @@ export class MCPAppsManager {
     const pipeline = pipelinesResponse.data?.pipelines?.find((p: any) => p.id === pipelineId);
     const opportunities = opportunitiesResponse.data?.opportunities || [];
 
+    // Simplify opportunity data to only include fields the UI needs (reduces payload size)
+    const simplifiedOpportunities = opportunities.map((opp: any) => ({
+      id: opp.id,
+      name: opp.name || 'Untitled',
+      pipelineStageId: opp.pipelineStageId,
+      status: opp.status || 'open',
+      monetaryValue: opp.monetaryValue || 0,
+      contact: opp.contact ? {
+        name: opp.contact.name || 'Unknown',
+        email: opp.contact.email,
+        phone: opp.contact.phone
+      } : { name: 'Unknown' },
+      updatedAt: opp.updatedAt || opp.createdAt,
+      createdAt: opp.createdAt,
+      source: opp.source
+    }));
+
     const data = {
       pipeline,
-      opportunities,
+      opportunities: simplifiedOpportunities,
       stages: pipeline?.stages || []
     };
 
@@ -693,6 +728,50 @@ export class MCPAppsManager {
   }
 
   /**
+   * Update opportunity (action tool for UI)
+   */
+  private async updateOpportunity(args: {
+    opportunityId: string;
+    pipelineStageId?: string;
+    name?: string;
+    monetaryValue?: number;
+    status?: 'open' | 'won' | 'lost' | 'abandoned';
+  }): Promise<AppToolResult> {
+    const { opportunityId, ...updates } = args;
+
+    // Build the update payload
+    const updatePayload: any = {};
+    if (updates.pipelineStageId) updatePayload.pipelineStageId = updates.pipelineStageId;
+    if (updates.name) updatePayload.name = updates.name;
+    if (updates.monetaryValue !== undefined) updatePayload.monetaryValue = updates.monetaryValue;
+    if (updates.status) updatePayload.status = updates.status;
+
+    process.stderr.write(`[MCP Apps] Updating opportunity ${opportunityId}: ${JSON.stringify(updatePayload)}\n`);
+
+    const response = await this.ghlClient.updateOpportunity(opportunityId, updatePayload);
+
+    if (!response.success) {
+      throw new Error(response.error?.message || 'Failed to update opportunity');
+    }
+
+    const opportunity = response.data;
+
+    return {
+      content: [{ type: 'text', text: `Updated opportunity: ${opportunity?.name || opportunityId}` }],
+      structuredContent: {
+        success: true,
+        opportunity: {
+          id: opportunity?.id,
+          name: opportunity?.name,
+          pipelineStageId: opportunity?.pipelineStageId,
+          monetaryValue: opportunity?.monetaryValue,
+          status: opportunity?.status
+        }
+      }
+    };
+  }
+
+  /**
    * Create app tool result with structuredContent
    */
   private createAppResult(
@@ -702,19 +781,11 @@ export class MCPAppsManager {
     htmlContent: string,
     data: any
   ): AppToolResult {
-    // Inject the data into the HTML
-    const htmlWithData = this.injectDataIntoHTML(htmlContent, data);
-
+    // structuredContent is the data object that gets passed to ontoolresult
+    // The UI accesses it via result.structuredContent
     return {
       content: [{ type: 'text', text: textSummary }],
-      structuredContent: {
-        type: 'resource',
-        resource: {
-          uri: resourceUri,
-          mimeType: mimeType,
-          text: htmlWithData
-        }
-      }
+      structuredContent: data
     };
   }
 

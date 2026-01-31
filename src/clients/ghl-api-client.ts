@@ -575,12 +575,12 @@ export class GHLApiClient {
         const filters: any = {};
         let hasFilters = false;
 
-        if (searchParams.filters.email && searchParams.filters.email.trim()) {
+        if (searchParams.filters.email && typeof searchParams.filters.email === 'string' && searchParams.filters.email.trim()) {
           filters.email = searchParams.filters.email.trim();
           hasFilters = true;
         }
         
-        if (searchParams.filters.phone && searchParams.filters.phone.trim()) {
+        if (searchParams.filters.phone && typeof searchParams.filters.phone === 'string' && searchParams.filters.phone.trim()) {
           filters.phone = searchParams.filters.phone.trim();
           hasFilters = true;
         }
@@ -1556,6 +1556,36 @@ export class GHLApiClient {
    */
   getConfig(): Readonly<GHLConfig> {
     return { ...this.config };
+  }
+
+  /**
+   * Generic request method for new endpoints
+   * Used by new tool modules that don't have specific client methods yet
+   */
+  async makeRequest<T = any>(method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE', path: string, body?: Record<string, unknown>): Promise<GHLApiResponse<T>> {
+    try {
+      let response;
+      switch (method) {
+        case 'GET':
+          response = await this.axiosInstance.get(path);
+          break;
+        case 'POST':
+          response = await this.axiosInstance.post(path, body);
+          break;
+        case 'PUT':
+          response = await this.axiosInstance.put(path, body);
+          break;
+        case 'PATCH':
+          response = await this.axiosInstance.patch(path, body);
+          break;
+        case 'DELETE':
+          response = await this.axiosInstance.delete(path);
+          break;
+      }
+      return this.wrapResponse(response.data);
+    } catch (error) {
+      throw error;
+    }
   }
 
   /**
