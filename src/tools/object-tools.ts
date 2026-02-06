@@ -48,7 +48,14 @@ export class ObjectTools {
             locationId: { 
               type: 'string', 
               description: 'Location ID (uses default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "objects",
+            access: "read",
+            complexity: "batch"
+          }
+        }
           },
           required: []
         }
@@ -64,7 +71,14 @@ export class ObjectTools {
               description: 'Singular and plural names for the custom object',
               properties: {
                 singular: { type: 'string', description: 'Singular name (e.g., "Pet")' },
-                plural: { type: 'string', description: 'Plural name (e.g., "Pets")' }
+                plural: { type: 'string', description: 'Plural name (e.g., "Pets")' },
+        _meta: {
+          labels: {
+            category: "objects",
+            access: "write",
+            complexity: "simple"
+          }
+        }
               },
               required: ['singular', 'plural']
             },
@@ -112,7 +126,14 @@ export class ObjectTools {
               type: 'boolean', 
               description: 'Whether to fetch all standard/custom fields of the object',
               default: true
-            }
+            },
+        _meta: {
+          labels: {
+            category: "objects",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['key']
         }
@@ -133,7 +154,14 @@ export class ObjectTools {
               properties: {
                 singular: { type: 'string', description: 'Updated singular name' },
                 plural: { type: 'string', description: 'Updated plural name' }
-              }
+              },
+        _meta: {
+          labels: {
+            category: "objects",
+            access: "write",
+            complexity: "simple"
+          }
+        }
             },
             description: { 
               type: 'string', 
@@ -181,7 +209,14 @@ export class ObjectTools {
               description: 'Array of user IDs who follow this record (limited to 10)',
               items: { type: 'string' },
               maxItems: 10
-            }
+            },
+        _meta: {
+          labels: {
+            category: "objects",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['schemaKey', 'properties']
         }
@@ -199,7 +234,14 @@ export class ObjectTools {
             recordId: { 
               type: 'string', 
               description: 'ID of the record to retrieve'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "objects",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['schemaKey', 'recordId']
         }
@@ -237,7 +279,14 @@ export class ObjectTools {
               description: 'Updated array of user IDs who follow this record',
               items: { type: 'string' },
               maxItems: 10
-            }
+            },
+        _meta: {
+          labels: {
+            category: "objects",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['schemaKey', 'recordId']
         }
@@ -255,7 +304,14 @@ export class ObjectTools {
             recordId: { 
               type: 'string', 
               description: 'ID of the record to delete'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "objects",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['schemaKey', 'recordId']
         }
@@ -295,7 +351,14 @@ export class ObjectTools {
               type: 'array',
               description: 'Cursor for pagination (returned from previous search)',
               items: { type: 'string' }
-            }
+            },
+        _meta: {
+          labels: {
+            category: "objects",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['schemaKey', 'query']
         }

@@ -40,7 +40,14 @@ export class EmailISVTools {
             verify: {
               type: 'string',
               description: 'Email address to verify (if type=email) or contact ID (if type=contact)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "email",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['locationId', 'type', 'verify']
         }

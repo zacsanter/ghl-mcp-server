@@ -15,7 +15,8 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build:dynamic-ui": "cd src/ui/react-app && npm run build",
+    "build": "npm run build:dynamic-ui && tsc",
     "dev": "nodemon --exec ts-node src/http-server.ts",
     "start": "node dist/http-server.js",
     "start:stdio": "node dist/server.js",
@@ -45,6 +46,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.72.1",
     "@modelcontextprotocol/sdk": "^1.12.1",
     "@types/cors": "^2.8.18",
     "@types/express": "^5.0.2",

@@ -18,7 +18,14 @@ export class WorkflowTools {
             locationId: {
               type: 'string',
               description: 'The location ID to get workflows for. If not provided, uses the default location from configuration.'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "workflows",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           additionalProperties: false
         }

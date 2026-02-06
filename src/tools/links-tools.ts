@@ -29,6 +29,13 @@ export class LinksTools {
               description: 'Maximum number of links to return'
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "links",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -44,7 +51,14 @@ export class LinksTools {
             locationId: {
               type: 'string',
               description: 'Location ID (uses default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "links",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['linkId']
         }
@@ -74,7 +88,14 @@ export class LinksTools {
             fieldValue: {
               type: 'string',
               description: 'Value to set for the custom field'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "links",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name', 'redirectTo']
         }
@@ -108,7 +129,14 @@ export class LinksTools {
             fieldValue: {
               type: 'string',
               description: 'Value to set for the custom field'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "links",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['linkId']
         }
@@ -126,7 +154,14 @@ export class LinksTools {
             locationId: {
               type: 'string',
               description: 'Location ID (uses default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "links",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['linkId']
         }

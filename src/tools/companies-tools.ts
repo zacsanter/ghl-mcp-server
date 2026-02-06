@@ -33,6 +33,13 @@ export class CompaniesTools {
               description: 'Search query to filter companies'
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "general",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -48,7 +55,14 @@ export class CompaniesTools {
             locationId: {
               type: 'string',
               description: 'Location ID (uses default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "general",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId']
         }
@@ -127,7 +141,14 @@ export class CompaniesTools {
                   id: { type: 'string' },
                   key: { type: 'string' },
                   value: { type: 'string' }
-                }
+                },
+        _meta: {
+          labels: {
+            category: "general",
+            access: "write",
+            complexity: "simple"
+          }
+        }
               },
               description: 'Custom field values'
             },
@@ -214,7 +235,14 @@ export class CompaniesTools {
                   id: { type: 'string' },
                   key: { type: 'string' },
                   value: { type: 'string' }
-                }
+                },
+        _meta: {
+          labels: {
+            category: "general",
+            access: "write",
+            complexity: "simple"
+          }
+        }
               },
               description: 'Custom field values'
             },
@@ -240,7 +268,14 @@ export class CompaniesTools {
             locationId: {
               type: 'string',
               description: 'Location ID (uses default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "general",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId']
         }

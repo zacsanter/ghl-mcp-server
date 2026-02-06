@@ -85,7 +85,14 @@ export class InvoicesTools {
             title: { type: 'string', description: 'Invoice title' },
             currency: { type: 'string', description: 'Currency code' },
             issueDate: { type: 'string', description: 'Issue date' },
-            dueDate: { type: 'string', description: 'Due date' }
+            dueDate: { type: 'string', description: 'Due date' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name']
         }
@@ -101,7 +108,14 @@ export class InvoicesTools {
             offset: { type: 'string', description: 'Offset for pagination', default: '0' },
             status: { type: 'string', description: 'Filter by status' },
             search: { type: 'string', description: 'Search term' },
-            paymentMode: { type: 'string', enum: ['default', 'live', 'test'], description: 'Payment mode' }
+            paymentMode: { type: 'string', enum: ['default', 'live', 'test'], description: 'Payment mode' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['limit', 'offset']
         }
@@ -113,7 +127,14 @@ export class InvoicesTools {
           type: 'object',
           properties: {
             templateId: { type: 'string', description: 'Template ID' },
-            altId: { type: 'string', description: 'Location ID' }
+            altId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['templateId']
         }
@@ -128,7 +149,14 @@ export class InvoicesTools {
             altId: { type: 'string', description: 'Location ID' },
             name: { type: 'string', description: 'Template name' },
             title: { type: 'string', description: 'Invoice title' },
-            currency: { type: 'string', description: 'Currency code' }
+            currency: { type: 'string', description: 'Currency code' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['templateId']
         }
@@ -140,7 +168,14 @@ export class InvoicesTools {
           type: 'object',
           properties: {
             templateId: { type: 'string', description: 'Template ID' },
-            altId: { type: 'string', description: 'Location ID' }
+            altId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['templateId']
         }
@@ -157,7 +192,14 @@ export class InvoicesTools {
             name: { type: 'string', description: 'Schedule name' },
             templateId: { type: 'string', description: 'Template ID' },
             contactId: { type: 'string', description: 'Contact ID' },
-            frequency: { type: 'string', description: 'Schedule frequency' }
+            frequency: { type: 'string', description: 'Schedule frequency' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name', 'templateId', 'contactId']
         }
@@ -172,7 +214,14 @@ export class InvoicesTools {
             limit: { type: 'string', description: 'Number of results per page', default: '10' },
             offset: { type: 'string', description: 'Offset for pagination', default: '0' },
             status: { type: 'string', description: 'Filter by status' },
-            search: { type: 'string', description: 'Search term' }
+            search: { type: 'string', description: 'Search term' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['limit', 'offset']
         }
@@ -184,7 +233,14 @@ export class InvoicesTools {
           type: 'object',
           properties: {
             scheduleId: { type: 'string', description: 'Schedule ID' },
-            altId: { type: 'string', description: 'Location ID' }
+            altId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['scheduleId']
         }
@@ -203,7 +259,14 @@ export class InvoicesTools {
             currency: { type: 'string', description: 'Currency code' },
             issueDate: { type: 'string', description: 'Issue date' },
             dueDate: { type: 'string', description: 'Due date' },
-            items: { type: 'array', description: 'Invoice items' }
+            items: { type: 'array', description: 'Invoice items' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['contactId', 'title']
         }
@@ -219,7 +282,14 @@ export class InvoicesTools {
             offset: { type: 'string', description: 'Offset for pagination', default: '0' },
             status: { type: 'string', description: 'Filter by status' },
             contactId: { type: 'string', description: 'Filter by contact ID' },
-            search: { type: 'string', description: 'Search term' }
+            search: { type: 'string', description: 'Search term' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['limit', 'offset']
         }
@@ -231,7 +301,14 @@ export class InvoicesTools {
           type: 'object',
           properties: {
             invoiceId: { type: 'string', description: 'Invoice ID' },
-            altId: { type: 'string', description: 'Location ID' }
+            altId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['invoiceId']
         }
@@ -246,7 +323,14 @@ export class InvoicesTools {
             altId: { type: 'string', description: 'Location ID' },
             emailTo: { type: 'string', description: 'Email address to send to' },
             subject: { type: 'string', description: 'Email subject' },
-            message: { type: 'string', description: 'Email message' }
+            message: { type: 'string', description: 'Email message' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['invoiceId']
         }
@@ -264,7 +348,14 @@ export class InvoicesTools {
             title: { type: 'string', description: 'Estimate title' },
             currency: { type: 'string', description: 'Currency code' },
             issueDate: { type: 'string', description: 'Issue date' },
-            validUntil: { type: 'string', description: 'Valid until date' }
+            validUntil: { type: 'string', description: 'Valid until date' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['contactId', 'title']
         }
@@ -280,7 +371,14 @@ export class InvoicesTools {
             offset: { type: 'string', description: 'Offset for pagination', default: '0' },
             status: { type: 'string', enum: ['all', 'draft', 'sent', 'accepted', 'declined', 'invoiced', 'viewed'], description: 'Filter by status' },
             contactId: { type: 'string', description: 'Filter by contact ID' },
-            search: { type: 'string', description: 'Search term' }
+            search: { type: 'string', description: 'Search term' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['limit', 'offset']
         }
@@ -295,7 +393,14 @@ export class InvoicesTools {
             altId: { type: 'string', description: 'Location ID' },
             emailTo: { type: 'string', description: 'Email address to send to' },
             subject: { type: 'string', description: 'Email subject' },
-            message: { type: 'string', description: 'Email message' }
+            message: { type: 'string', description: 'Email message' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['estimateId']
         }
@@ -309,7 +414,14 @@ export class InvoicesTools {
             estimateId: { type: 'string', description: 'Estimate ID' },
             altId: { type: 'string', description: 'Location ID' },
             issueDate: { type: 'string', description: 'Invoice issue date' },
-            dueDate: { type: 'string', description: 'Invoice due date' }
+            dueDate: { type: 'string', description: 'Invoice due date' },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['estimateId']
         }
@@ -323,6 +435,13 @@ export class InvoicesTools {
           type: 'object',
           properties: {
             altId: { type: 'string', description: 'Location ID' }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "invoices",
+            access: "read",
+            complexity: "simple"
           }
         }
       },

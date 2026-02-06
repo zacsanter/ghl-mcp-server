@@ -33,6 +33,13 @@ export class FormsTools {
               description: 'Filter by form type (e.g., "form", "survey")'
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "forms",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -68,7 +75,14 @@ export class FormsTools {
             page: {
               type: 'number',
               description: 'Page number for pagination'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "forms",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['formId']
         }
@@ -86,7 +100,14 @@ export class FormsTools {
             locationId: {
               type: 'string',
               description: 'Location ID (uses default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "forms",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['formId']
         }

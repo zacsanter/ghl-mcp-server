@@ -19,6 +19,13 @@ export class PhoneTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -28,7 +35,14 @@ export class PhoneTools {
           type: 'object',
           properties: {
             phoneNumberId: { type: 'string', description: 'Phone Number ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['phoneNumberId']
         }
@@ -43,7 +57,14 @@ export class PhoneTools {
             country: { type: 'string', description: 'Country code (e.g., US, CA)' },
             areaCode: { type: 'string', description: 'Area code to search' },
             contains: { type: 'string', description: 'Number pattern to search for' },
-            type: { type: 'string', enum: ['local', 'tollfree', 'mobile'], description: 'Number type' }
+            type: { type: 'string', enum: ['local', 'tollfree', 'mobile'], description: 'Number type' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['country']
         }
@@ -56,7 +77,14 @@ export class PhoneTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' },
             phoneNumber: { type: 'string', description: 'Phone number to purchase' },
-            name: { type: 'string', description: 'Friendly name for the number' }
+            name: { type: 'string', description: 'Friendly name for the number' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['phoneNumber']
         }
@@ -72,7 +100,14 @@ export class PhoneTools {
             name: { type: 'string', description: 'Friendly name' },
             forwardingNumber: { type: 'string', description: 'Number to forward calls to' },
             callRecording: { type: 'boolean', description: 'Enable call recording' },
-            whisperMessage: { type: 'string', description: 'Whisper message played to agent' }
+            whisperMessage: { type: 'string', description: 'Whisper message played to agent' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['phoneNumberId']
         }
@@ -84,7 +119,14 @@ export class PhoneTools {
           type: 'object',
           properties: {
             phoneNumberId: { type: 'string', description: 'Phone Number ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['phoneNumberId']
         }
@@ -98,7 +140,14 @@ export class PhoneTools {
           type: 'object',
           properties: {
             phoneNumberId: { type: 'string', description: 'Phone Number ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "write",
+            complexity: "batch"
+          }
+        }
           },
           required: ['phoneNumberId']
         }
@@ -114,7 +163,14 @@ export class PhoneTools {
             enabled: { type: 'boolean', description: 'Enable forwarding' },
             forwardTo: { type: 'string', description: 'Number to forward to' },
             ringTimeout: { type: 'number', description: 'Ring timeout in seconds' },
-            voicemailEnabled: { type: 'boolean', description: 'Enable voicemail on no answer' }
+            voicemailEnabled: { type: 'boolean', description: 'Enable voicemail on no answer' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "write",
+            complexity: "batch"
+          }
+        }
           },
           required: ['phoneNumberId']
         }
@@ -128,6 +184,13 @@ export class PhoneTools {
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'Location ID' }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "read",
+            complexity: "simple"
           }
         }
       },
@@ -148,7 +211,14 @@ export class PhoneTools {
                   digit: { type: 'string', description: 'Digit to press (0-9, *, #)' },
                   action: { type: 'string', description: 'Action type' },
                   destination: { type: 'string', description: 'Action destination' }
-                }
+                },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "write",
+            complexity: "simple"
+          }
+        }
               },
               description: 'Menu options'
             }
@@ -166,7 +236,14 @@ export class PhoneTools {
             locationId: { type: 'string', description: 'Location ID' },
             name: { type: 'string', description: 'Menu name' },
             greeting: { type: 'string', description: 'Greeting message' },
-            options: { type: 'array', description: 'Menu options' }
+            options: { type: 'array', description: 'Menu options' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['menuId']
         }
@@ -178,7 +255,14 @@ export class PhoneTools {
           type: 'object',
           properties: {
             menuId: { type: 'string', description: 'IVR Menu ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['menuId']
         }
@@ -192,6 +276,13 @@ export class PhoneTools {
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'Location ID' }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "write",
+            complexity: "simple"
           }
         }
       },
@@ -207,6 +298,13 @@ export class PhoneTools {
             transcriptionEnabled: { type: 'boolean', description: 'Enable transcription' },
             notificationEmail: { type: 'string', description: 'Email for voicemail notifications' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -221,6 +319,13 @@ export class PhoneTools {
             limit: { type: 'number', description: 'Max results' },
             offset: { type: 'number', description: 'Pagination offset' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -230,7 +335,14 @@ export class PhoneTools {
           type: 'object',
           properties: {
             voicemailId: { type: 'string', description: 'Voicemail ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['voicemailId']
         }
@@ -245,6 +357,13 @@ export class PhoneTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -255,7 +374,14 @@ export class PhoneTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' },
             phoneNumber: { type: 'string', description: 'Phone number to verify' },
-            name: { type: 'string', description: 'Friendly name' }
+            name: { type: 'string', description: 'Friendly name' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['phoneNumber']
         }
@@ -268,7 +394,14 @@ export class PhoneTools {
           properties: {
             callerIdId: { type: 'string', description: 'Caller ID record ID' },
             locationId: { type: 'string', description: 'Location ID' },
-            code: { type: 'string', description: 'Verification code' }
+            code: { type: 'string', description: 'Verification code' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['callerIdId', 'code']
         }
@@ -280,7 +413,14 @@ export class PhoneTools {
           type: 'object',
           properties: {
             callerIdId: { type: 'string', description: 'Caller ID record ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "phone-numbers",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['callerIdId']
         }

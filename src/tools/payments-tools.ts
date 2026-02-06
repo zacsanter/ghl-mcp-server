@@ -69,7 +69,14 @@ export class PaymentsTools {
             imageUrl: {
               type: 'string',
               description: 'The URL to an image representing the integration provider'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['altId', 'altType', 'uniqueName', 'title', 'provider', 'description', 'imageUrl']
         }
@@ -98,7 +105,14 @@ export class PaymentsTools {
               type: 'number',
               description: 'Starting index for pagination',
               default: 0
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['altId', 'altType']
         }
@@ -160,7 +174,14 @@ export class PaymentsTools {
               type: 'number',
               description: 'Starting index for pagination',
               default: 0
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['altId', 'altType']
         }
@@ -186,7 +207,14 @@ export class PaymentsTools {
             altType: {
               type: 'string',
               description: 'Alt Type (type of identifier)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['orderId', 'altId', 'altType']
         }
@@ -231,7 +259,14 @@ export class PaymentsTools {
                     description: 'Tracking URL'
                   }
                 }
-              }
+              },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "write",
+            complexity: "simple"
+          }
+        }
             },
             items: {
               type: 'array',
@@ -277,7 +312,14 @@ export class PaymentsTools {
               type: 'string',
               enum: ['location'],
               description: 'Alt Type'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['orderId', 'altId', 'altType']
         }
@@ -347,7 +389,14 @@ export class PaymentsTools {
               type: 'number',
               description: 'Starting index for pagination',
               default: 0
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['altId', 'altType']
         }
@@ -373,7 +422,14 @@ export class PaymentsTools {
             altType: {
               type: 'string',
               description: 'Alt Type (type of identifier)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['transactionId', 'altId', 'altType']
         }
@@ -436,7 +492,14 @@ export class PaymentsTools {
               type: 'number',
               description: 'Starting index for pagination',
               default: 0
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['altId', 'altType']
         }
@@ -459,7 +522,14 @@ export class PaymentsTools {
               type: 'string',
               enum: ['location'],
               description: 'Alt Type'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['subscriptionId', 'altId', 'altType']
         }
@@ -499,7 +569,14 @@ export class PaymentsTools {
             search: {
               type: 'string',
               description: 'Search term to filter coupons by name or code'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['altId', 'altType']
         }
@@ -553,7 +630,14 @@ export class PaymentsTools {
               description: 'Product IDs that the coupon applies to',
               items: {
                 type: 'string'
-              }
+              },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "write",
+            complexity: "simple"
+          }
+        }
             },
             applyToFuturePayments: {
               type: 'boolean',
@@ -643,7 +727,14 @@ export class PaymentsTools {
               description: 'Product IDs that the coupon applies to',
               items: {
                 type: 'string'
-              }
+              },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "write",
+            complexity: "simple"
+          }
+        }
             },
             applyToFuturePayments: {
               type: 'boolean',
@@ -696,7 +787,14 @@ export class PaymentsTools {
             id: {
               type: 'string',
               description: 'Coupon ID'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['altId', 'altType', 'id']
         }
@@ -723,7 +821,14 @@ export class PaymentsTools {
             code: {
               type: 'string',
               description: 'Coupon code'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['altId', 'altType', 'id', 'code']
         }
@@ -759,7 +864,14 @@ export class PaymentsTools {
             imageUrl: {
               type: 'string',
               description: 'Public image URL for the payment gateway logo'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['locationId', 'name', 'description', 'paymentsUrl', 'queryUrl', 'imageUrl']
         }
@@ -773,7 +885,14 @@ export class PaymentsTools {
             locationId: {
               type: 'string',
               description: 'Location ID'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['locationId']
         }
@@ -787,7 +906,14 @@ export class PaymentsTools {
             locationId: {
               type: 'string',
               description: 'Location ID'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['locationId']
         }
@@ -813,7 +939,14 @@ export class PaymentsTools {
                 publishableKey: {
                   type: 'string',
                   description: 'Publishable key for live payments'
-                }
+                },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "write",
+            complexity: "simple"
+          }
+        }
               },
               required: ['apiKey', 'publishableKey']
             },
@@ -849,7 +982,14 @@ export class PaymentsTools {
             liveMode: {
               type: 'boolean',
               description: 'Whether to disconnect live or test mode config'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "payments",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['locationId', 'liveMode']
         }

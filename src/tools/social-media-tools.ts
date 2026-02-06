@@ -56,7 +56,14 @@ export class SocialMediaTools {
               type: 'string',
               enum: ['post', 'story', 'reel'],
               description: 'Type of post to search for'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['fromDate', 'toDate']
         }
@@ -80,7 +87,14 @@ export class SocialMediaTools {
                 properties: {
                   url: { type: 'string', description: 'Media URL' },
                   caption: { type: 'string', description: 'Media caption' },
-                  type: { type: 'string', description: 'Media MIME type' }
+                  type: { type: 'string', description: 'Media MIME type' },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "write",
+            complexity: "simple"
+          }
+        }
                 },
                 required: ['url']
               },
@@ -116,7 +130,14 @@ export class SocialMediaTools {
         inputSchema: {
           type: 'object',
           properties: {
-            postId: { type: 'string', description: 'Social media post ID' }
+            postId: { type: 'string', description: 'Social media post ID' },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['postId']
         }
@@ -139,7 +160,14 @@ export class SocialMediaTools {
               type: 'array',
               items: { type: 'string' },
               description: 'Updated tag IDs'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['postId']
         }
@@ -150,7 +178,14 @@ export class SocialMediaTools {
         inputSchema: {
           type: 'object',
           properties: {
-            postId: { type: 'string', description: 'Social media post ID to delete' }
+            postId: { type: 'string', description: 'Social media post ID to delete' },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['postId']
         }
@@ -166,7 +201,14 @@ export class SocialMediaTools {
               items: { type: 'string' },
               description: 'Array of post IDs to delete',
               maxItems: 50
-            }
+            },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "delete",
+            complexity: "batch"
+          }
+        }
           },
           required: ['postIds']
         }
@@ -180,6 +222,13 @@ export class SocialMediaTools {
           type: 'object',
           properties: {},
           additionalProperties: false
+        },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -190,7 +239,14 @@ export class SocialMediaTools {
           properties: {
             accountId: { type: 'string', description: 'Account ID to delete' },
             companyId: { type: 'string', description: 'Company ID' },
-            userId: { type: 'string', description: 'User ID' }
+            userId: { type: 'string', description: 'User ID' },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['accountId']
         }
@@ -203,7 +259,14 @@ export class SocialMediaTools {
         inputSchema: {
           type: 'object',
           properties: {
-            file: { type: 'string', description: 'CSV file data (base64 or file path)' }
+            file: { type: 'string', description: 'CSV file data (base64 or file path)' },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['file']
         }
@@ -218,6 +281,13 @@ export class SocialMediaTools {
             limit: { type: 'number', description: 'Number to return', default: 10 },
             includeUsers: { type: 'boolean', description: 'Include user data' },
             userId: { type: 'string', description: 'Filter by user ID' }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "write",
+            complexity: "simple"
           }
         }
       },
@@ -236,7 +306,14 @@ export class SocialMediaTools {
             rowsCount: { type: 'number', description: 'Number of rows to process' },
             fileName: { type: 'string', description: 'CSV file name' },
             approver: { type: 'string', description: 'Approver user ID' },
-            userId: { type: 'string', description: 'User ID' }
+            userId: { type: 'string', description: 'User ID' },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['accountIds', 'filePath', 'rowsCount', 'fileName']
         }
@@ -253,6 +330,13 @@ export class SocialMediaTools {
             limit: { type: 'number', description: 'Number to return', default: 10 },
             skip: { type: 'number', description: 'Number to skip', default: 0 }
           }
+        },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -261,7 +345,14 @@ export class SocialMediaTools {
         inputSchema: {
           type: 'object',
           properties: {
-            categoryId: { type: 'string', description: 'Category ID' }
+            categoryId: { type: 'string', description: 'Category ID' },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['categoryId']
         }
@@ -276,6 +367,13 @@ export class SocialMediaTools {
             limit: { type: 'number', description: 'Number to return', default: 10 },
             skip: { type: 'number', description: 'Number to skip', default: 0 }
           }
+        },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -288,7 +386,14 @@ export class SocialMediaTools {
               type: 'array',
               items: { type: 'string' },
               description: 'Array of tag IDs'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['tagIds']
         }
@@ -308,7 +413,14 @@ export class SocialMediaTools {
             },
             userId: { type: 'string', description: 'User ID initiating OAuth' },
             page: { type: 'string', description: 'Page context' },
-            reconnect: { type: 'boolean', description: 'Whether this is a reconnection' }
+            reconnect: { type: 'boolean', description: 'Whether this is a reconnection' },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['platform', 'userId']
         }
@@ -324,7 +436,14 @@ export class SocialMediaTools {
               enum: ['google', 'facebook', 'instagram', 'linkedin', 'twitter', 'tiktok', 'tiktok-business'],
               description: 'Social media platform'
             },
-            accountId: { type: 'string', description: 'OAuth account ID' }
+            accountId: { type: 'string', description: 'OAuth account ID' },
+        _meta: {
+          labels: {
+            category: "social-media",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['platform', 'accountId']
         }

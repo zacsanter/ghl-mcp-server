@@ -31,7 +31,14 @@ export class SurveyTools {
             type: {
               type: 'string',
               description: 'Filter surveys by type (e.g., "folder")'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "surveys",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           additionalProperties: false
         }
@@ -69,7 +76,14 @@ export class SurveyTools {
             endAt: {
               type: 'string',
               description: 'End date for filtering submissions (YYYY-MM-DD format)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "surveys",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           additionalProperties: false
         }

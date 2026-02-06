@@ -1068,7 +1068,14 @@ These settings control your store's shipping origin and email notification prefe
                     items: {
                       type: 'object',
                       properties: {
-                        code: { type: 'string', description: 'State code (e.g., CA, NY)' }
+                        code: { type: 'string', description: 'State code (e.g., CA, NY)' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "write",
+            complexity: "simple"
+          }
+        }
                       },
                       required: ['code']
                     }
@@ -1092,6 +1099,13 @@ These settings control your store's shipping origin and email notification prefe
             offset: { type: 'number', description: 'Number of zones to skip (optional)' },
             withShippingRate: { type: 'boolean', description: 'Include shipping rates in response (optional)' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -1102,7 +1116,14 @@ These settings control your store's shipping origin and email notification prefe
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' },
             shippingZoneId: { type: 'string', description: 'ID of the shipping zone to retrieve' },
-            withShippingRate: { type: 'boolean', description: 'Include shipping rates in response (optional)' }
+            withShippingRate: { type: 'boolean', description: 'Include shipping rates in response (optional)' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingZoneId']
         }
@@ -1129,7 +1150,14 @@ These settings control your store's shipping origin and email notification prefe
                     items: {
                       type: 'object',
                       properties: {
-                        code: { type: 'string', description: 'State code (e.g., CA, NY)' }
+                        code: { type: 'string', description: 'State code (e.g., CA, NY)' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "write",
+            complexity: "simple"
+          }
+        }
                       },
                       required: ['code']
                     }
@@ -1149,7 +1177,14 @@ These settings control your store's shipping origin and email notification prefe
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' },
-            shippingZoneId: { type: 'string', description: 'ID of the shipping zone to delete' }
+            shippingZoneId: { type: 'string', description: 'ID of the shipping zone to delete' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingZoneId']
         }
@@ -1170,7 +1205,14 @@ These settings control your store's shipping origin and email notification prefe
               properties: {
                 street1: { type: 'string', description: 'Street address line 1' },
                 city: { type: 'string', description: 'City' },
-                country: { type: 'string', description: 'Country code' }
+                country: { type: 'string', description: 'Country code' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "read",
+            complexity: "simple"
+          }
+        }
               },
               required: ['street1', 'city', 'country']
             },
@@ -1203,7 +1245,14 @@ These settings control your store's shipping origin and email notification prefe
             name: { type: 'string', description: 'Name of the shipping rate' },
             currency: { type: 'string', description: 'Currency code (e.g., USD)' },
             amount: { type: 'number', description: 'Shipping rate amount' },
-            conditionType: { type: 'string', description: 'Condition type for rate calculation' }
+            conditionType: { type: 'string', description: 'Condition type for rate calculation' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingZoneId', 'name', 'currency', 'amount', 'conditionType']
         }
@@ -1215,7 +1264,14 @@ These settings control your store's shipping origin and email notification prefe
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' },
-            shippingZoneId: { type: 'string', description: 'ID of the shipping zone' }
+            shippingZoneId: { type: 'string', description: 'ID of the shipping zone' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingZoneId']
         }
@@ -1228,7 +1284,14 @@ These settings control your store's shipping origin and email notification prefe
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' },
             shippingZoneId: { type: 'string', description: 'ID of the shipping zone' },
-            shippingRateId: { type: 'string', description: 'ID of the shipping rate to retrieve' }
+            shippingRateId: { type: 'string', description: 'ID of the shipping rate to retrieve' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingZoneId', 'shippingRateId']
         }
@@ -1241,7 +1304,14 @@ These settings control your store's shipping origin and email notification prefe
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' },
             shippingZoneId: { type: 'string', description: 'ID of the shipping zone' },
-            shippingRateId: { type: 'string', description: 'ID of the shipping rate to update' }
+            shippingRateId: { type: 'string', description: 'ID of the shipping rate to update' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingZoneId', 'shippingRateId']
         }
@@ -1254,7 +1324,14 @@ These settings control your store's shipping origin and email notification prefe
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' },
             shippingZoneId: { type: 'string', description: 'ID of the shipping zone' },
-            shippingRateId: { type: 'string', description: 'ID of the shipping rate to delete' }
+            shippingRateId: { type: 'string', description: 'ID of the shipping rate to delete' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingZoneId', 'shippingRateId']
         }
@@ -1277,7 +1354,14 @@ These settings control your store's shipping origin and email notification prefe
                 type: 'object',
                 properties: {
                   name: { type: 'string', description: 'Service name' },
-                  value: { type: 'string', description: 'Service value' }
+                  value: { type: 'string', description: 'Service value' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "write",
+            complexity: "simple"
+          }
+        }
                 },
                 required: ['name', 'value']
               }
@@ -1294,6 +1378,13 @@ These settings control your store's shipping origin and email notification prefe
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -1303,7 +1394,14 @@ These settings control your store's shipping origin and email notification prefe
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' },
-            shippingCarrierId: { type: 'string', description: 'ID of the shipping carrier to retrieve' }
+            shippingCarrierId: { type: 'string', description: 'ID of the shipping carrier to retrieve' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingCarrierId']
         }
@@ -1315,7 +1413,14 @@ These settings control your store's shipping origin and email notification prefe
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' },
-            shippingCarrierId: { type: 'string', description: 'ID of the shipping carrier to update' }
+            shippingCarrierId: { type: 'string', description: 'ID of the shipping carrier to update' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingCarrierId']
         }
@@ -1327,7 +1432,14 @@ These settings control your store's shipping origin and email notification prefe
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'GHL Location ID (optional, uses default if not provided)' },
-            shippingCarrierId: { type: 'string', description: 'ID of the shipping carrier to delete' }
+            shippingCarrierId: { type: 'string', description: 'ID of the shipping carrier to delete' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['shippingCarrierId']
         }
@@ -1349,7 +1461,14 @@ These settings control your store's shipping origin and email notification prefe
                 street1: { type: 'string', description: 'Street address line 1' },
                 city: { type: 'string', description: 'City' },
                 zip: { type: 'string', description: 'Postal/ZIP code' },
-                country: { type: 'string', description: 'Country code' }
+                country: { type: 'string', description: 'Country code' },
+        _meta: {
+          labels: {
+            category: "stores",
+            access: "write",
+            complexity: "simple"
+          }
+        }
               },
               required: ['name', 'street1', 'city', 'zip', 'country']
             }

@@ -40,6 +40,13 @@ export class AssociationTools {
               default: 20
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "read",
+            complexity: "batch"
+          }
         }
       },
       {
@@ -67,7 +74,14 @@ export class AssociationTools {
             },
             secondObjectKey: {
               description: 'Key for the second object (e.g., "contact")'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['key', 'firstObjectLabel', 'firstObjectKey', 'secondObjectLabel', 'secondObjectKey']
         }
@@ -81,7 +95,14 @@ export class AssociationTools {
             associationId: {
               type: 'string',
               description: 'The ID of the association to retrieve'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['associationId']
         }
@@ -101,7 +122,14 @@ export class AssociationTools {
             },
             secondObjectLabel: {
               description: 'New label for the second object in the association'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['associationId', 'firstObjectLabel', 'secondObjectLabel']
         }
@@ -115,7 +143,14 @@ export class AssociationTools {
             associationId: {
               type: 'string',
               description: 'The ID of the association to delete'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['associationId']
         }
@@ -133,7 +168,14 @@ export class AssociationTools {
             locationId: {
               type: 'string',
               description: 'GoHighLevel location ID (will use default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['keyName']
         }
@@ -151,7 +193,14 @@ export class AssociationTools {
             locationId: {
               type: 'string',
               description: 'GoHighLevel location ID (optional)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['objectKey']
         }
@@ -178,7 +227,14 @@ export class AssociationTools {
             secondRecordId: {
               type: 'string',
               description: 'ID of the second record (e.g., custom object record ID if custom object is second object)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['associationId', 'firstRecordId', 'secondRecordId']
         }
@@ -213,7 +269,14 @@ export class AssociationTools {
                 type: 'string'
               },
               description: 'Optional array of association IDs to filter relations'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['recordId']
         }
@@ -231,7 +294,14 @@ export class AssociationTools {
             locationId: {
               type: 'string',
               description: 'GoHighLevel location ID (will use default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "associations",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['relationId']
         }

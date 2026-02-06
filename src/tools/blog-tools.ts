@@ -94,6 +94,13 @@ export class BlogTools {
         publishedAt: {
           type: 'string',
           description: 'Optional ISO timestamp for publication date (defaults to now for PUBLISHED status)'
+        },
+        _meta: {
+          labels: {
+            category: "blogs",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       required: ['title', 'blogId', 'content', 'description', 'imageUrl', 'imageAltText', 'urlSlug', 'author', 'categories']
@@ -165,6 +172,13 @@ export class BlogTools {
         publishedAt: {
           type: 'string',
           description: 'Updated ISO timestamp for publication date'
+        },
+        _meta: {
+          labels: {
+            category: "blogs",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       required: ['postId', 'blogId']
@@ -200,6 +214,13 @@ export class BlogTools {
           type: 'string',
           enum: ['DRAFT', 'PUBLISHED', 'SCHEDULED', 'ARCHIVED'],
           description: 'Optional filter by publication status'
+        },
+        _meta: {
+          labels: {
+            category: "blogs",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       required: ['blogId']
@@ -228,7 +249,14 @@ export class BlogTools {
           description: 'Optional search term to filter blogs by name'
         }
       }
-    }
+    },
+        _meta: {
+          labels: {
+            category: "blogs",
+            access: "read",
+            complexity: "simple"
+          }
+        }
   },
 
   // 5. Get Blog Authors
@@ -249,7 +277,14 @@ export class BlogTools {
           default: 0
         }
       }
-    }
+    },
+        _meta: {
+          labels: {
+            category: "blogs",
+            access: "read",
+            complexity: "simple"
+          }
+        }
   },
 
   // 6. Get Blog Categories
@@ -270,7 +305,14 @@ export class BlogTools {
           default: 0
         }
       }
-    }
+    },
+        _meta: {
+          labels: {
+            category: "blogs",
+            access: "read",
+            complexity: "simple"
+          }
+        }
   },
 
   // 7. Check URL Slug
@@ -287,6 +329,13 @@ export class BlogTools {
         postId: {
           type: 'string',
           description: 'Optional post ID when updating an existing post (to exclude itself from the check)'
+        },
+        _meta: {
+          labels: {
+            category: "blogs",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       required: ['urlSlug']

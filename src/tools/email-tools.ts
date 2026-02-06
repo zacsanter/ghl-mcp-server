@@ -50,6 +50,13 @@ export class EmailTools {
               default: 0
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "email",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -70,7 +77,14 @@ export class EmailTools {
               type: 'boolean',
               description: 'Whether the template is plain text.',
               default: false
-            }
+            },
+        _meta: {
+          labels: {
+            category: "email",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['title', 'html']
         }
@@ -92,6 +106,13 @@ export class EmailTools {
               default: 0
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "email",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -111,7 +132,14 @@ export class EmailTools {
             previewText: {
               type: 'string',
               description: 'The updated preview text for the template.'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "email",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['templateId', 'html']
         }
@@ -125,7 +153,14 @@ export class EmailTools {
             templateId: {
               type: 'string',
               description: 'The ID of the template to delete.'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "email",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['templateId']
         }

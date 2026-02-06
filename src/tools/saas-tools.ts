@@ -36,7 +36,14 @@ export class SaasTools {
             isActive: {
               type: 'boolean',
               description: 'Filter by active status'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "saas",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId']
         }
@@ -54,7 +61,14 @@ export class SaasTools {
             locationId: {
               type: 'string',
               description: 'Location ID to retrieve'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "saas",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId', 'locationId']
         }
@@ -81,7 +95,14 @@ export class SaasTools {
               type: 'string',
               enum: ['active', 'paused', 'cancelled'],
               description: 'Subscription status'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "saas",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId', 'locationId']
         }
@@ -103,7 +124,14 @@ export class SaasTools {
             paused: {
               type: 'boolean',
               description: 'Whether to pause (true) or unpause (false)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "saas",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId', 'locationId', 'paused']
         }
@@ -125,7 +153,14 @@ export class SaasTools {
             enabled: {
               type: 'boolean',
               description: 'Whether to enable (true) or disable (false) SaaS'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "saas",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId', 'locationId', 'enabled']
         }
@@ -151,7 +186,14 @@ export class SaasTools {
             enabled: {
               type: 'boolean',
               description: 'Whether rebilling is enabled'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "saas",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId']
         }

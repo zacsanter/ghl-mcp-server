@@ -62,6 +62,13 @@ export class CalendarTools {
         inputSchema: {
           type: 'object',
           properties: {}
+        },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -79,6 +86,13 @@ export class CalendarTools {
               description: 'Include draft calendars (default: true)',
               default: true
             }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
           }
         }
       },
@@ -136,7 +150,14 @@ export class CalendarTools {
               type: 'boolean',
               description: 'Make calendar active immediately (default: true)',
               default: true
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name', 'calendarType']
         }
@@ -150,7 +171,14 @@ export class CalendarTools {
             calendarId: {
               type: 'string',
               description: 'The unique ID of the calendar to retrieve'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['calendarId']
         }
@@ -192,7 +220,14 @@ export class CalendarTools {
             isActive: {
               type: 'boolean',
               description: 'Updated active status'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['calendarId']
         }
@@ -206,7 +241,14 @@ export class CalendarTools {
             calendarId: {
               type: 'string',
               description: 'The unique ID of the calendar to delete'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['calendarId']
         }
@@ -236,7 +278,14 @@ export class CalendarTools {
             groupId: {
               type: 'string',
               description: 'Filter events by calendar group ID'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startTime', 'endTime']
         }
@@ -266,7 +315,14 @@ export class CalendarTools {
             userId: {
               type: 'string',
               description: 'Specific user ID to check availability for'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['calendarId', 'startDate', 'endDate']
         }
@@ -326,7 +382,14 @@ export class CalendarTools {
               type: 'boolean',
               description: 'Send notifications for this appointment',
               default: true
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['calendarId', 'contactId', 'startTime']
         }
@@ -340,7 +403,14 @@ export class CalendarTools {
             appointmentId: {
               type: 'string',
               description: 'The unique ID of the appointment to retrieve'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['appointmentId']
         }
@@ -384,7 +454,14 @@ export class CalendarTools {
               type: 'boolean',
               description: 'Send notifications for this update',
               default: true
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['appointmentId']
         }
@@ -398,7 +475,14 @@ export class CalendarTools {
             appointmentId: {
               type: 'string',
               description: 'The unique ID of the appointment to delete'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['appointmentId']
         }
@@ -428,7 +512,14 @@ export class CalendarTools {
             assignedUserId: {
               type: 'string',
               description: 'User ID to apply the block for'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startTime', 'endTime']
         }
@@ -462,7 +553,14 @@ export class CalendarTools {
             assignedUserId: {
               type: 'string',
               description: 'Updated assigned user ID'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['blockSlotId']
         }
@@ -476,7 +574,14 @@ export class CalendarTools {
             name: { type: 'string', description: 'Group name' },
             description: { type: 'string', description: 'Group description' },
             slug: { type: 'string', description: 'URL slug for the group' },
-            isActive: { type: 'boolean', description: 'Whether group is active', default: true }
+            isActive: { type: 'boolean', description: 'Whether group is active', default: true },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name', 'description', 'slug']
         }
@@ -488,7 +593,14 @@ export class CalendarTools {
           type: 'object',
           properties: {
             slug: { type: 'string', description: 'Slug to validate' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['slug']
         }
@@ -502,7 +614,14 @@ export class CalendarTools {
             groupId: { type: 'string', description: 'Calendar group ID' },
             name: { type: 'string', description: 'Group name' },
             description: { type: 'string', description: 'Group description' },
-            slug: { type: 'string', description: 'URL slug for the group' }
+            slug: { type: 'string', description: 'URL slug for the group' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['groupId', 'name', 'description', 'slug']
         }
@@ -513,7 +632,14 @@ export class CalendarTools {
         inputSchema: {
           type: 'object',
           properties: {
-            groupId: { type: 'string', description: 'Calendar group ID' }
+            groupId: { type: 'string', description: 'Calendar group ID' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['groupId']
         }
@@ -525,7 +651,14 @@ export class CalendarTools {
           type: 'object',
           properties: {
             groupId: { type: 'string', description: 'Calendar group ID' },
-            isActive: { type: 'boolean', description: 'Whether to enable (true) or disable (false) the group' }
+            isActive: { type: 'boolean', description: 'Whether to enable (true) or disable (false) the group' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['groupId', 'isActive']
         }
@@ -538,7 +671,14 @@ export class CalendarTools {
           properties: {
             appointmentId: { type: 'string', description: 'Appointment ID' },
             limit: { type: 'number', description: 'Maximum number of notes to return', default: 10 },
-            offset: { type: 'number', description: 'Number of notes to skip', default: 0 }
+            offset: { type: 'number', description: 'Number of notes to skip', default: 0 },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['appointmentId']
         }
@@ -551,7 +691,14 @@ export class CalendarTools {
           properties: {
             appointmentId: { type: 'string', description: 'Appointment ID' },
             body: { type: 'string', description: 'Note content' },
-            userId: { type: 'string', description: 'User ID creating the note' }
+            userId: { type: 'string', description: 'User ID creating the note' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['appointmentId', 'body']
         }
@@ -565,7 +712,14 @@ export class CalendarTools {
             appointmentId: { type: 'string', description: 'Appointment ID' },
             noteId: { type: 'string', description: 'Note ID' },
             body: { type: 'string', description: 'Updated note content' },
-            userId: { type: 'string', description: 'User ID updating the note' }
+            userId: { type: 'string', description: 'User ID updating the note' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['appointmentId', 'noteId', 'body']
         }
@@ -577,7 +731,14 @@ export class CalendarTools {
           type: 'object',
           properties: {
             appointmentId: { type: 'string', description: 'Appointment ID' },
-            noteId: { type: 'string', description: 'Note ID' }
+            noteId: { type: 'string', description: 'Note ID' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['appointmentId', 'noteId']
         }
@@ -590,6 +751,13 @@ export class CalendarTools {
           properties: {
             limit: { type: 'number', description: 'Maximum number to return', default: 20 },
             skip: { type: 'number', description: 'Number to skip', default: 0 }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
           }
         }
       },
@@ -604,7 +772,14 @@ export class CalendarTools {
             quantity: { type: 'number', description: 'Total quantity available' },
             outOfService: { type: 'number', description: 'Number currently out of service' },
             capacity: { type: 'number', description: 'Capacity per unit' },
-            calendarIds: { type: 'array', items: { type: 'string' }, description: 'Associated calendar IDs' }
+            calendarIds: { type: 'array', items: { type: 'string' }, description: 'Associated calendar IDs' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name', 'description', 'quantity', 'outOfService', 'capacity', 'calendarIds']
         }
@@ -615,7 +790,14 @@ export class CalendarTools {
         inputSchema: {
           type: 'object',
           properties: {
-            resourceId: { type: 'string', description: 'Equipment resource ID' }
+            resourceId: { type: 'string', description: 'Equipment resource ID' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['resourceId']
         }
@@ -633,7 +815,14 @@ export class CalendarTools {
             outOfService: { type: 'number', description: 'Number currently out of service' },
             capacity: { type: 'number', description: 'Capacity per unit' },
             calendarIds: { type: 'array', items: { type: 'string' }, description: 'Associated calendar IDs' },
-            isActive: { type: 'boolean', description: 'Whether resource is active' }
+            isActive: { type: 'boolean', description: 'Whether resource is active' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['resourceId']
         }
@@ -644,7 +833,14 @@ export class CalendarTools {
         inputSchema: {
           type: 'object',
           properties: {
-            resourceId: { type: 'string', description: 'Equipment resource ID' }
+            resourceId: { type: 'string', description: 'Equipment resource ID' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['resourceId']
         }
@@ -657,6 +853,13 @@ export class CalendarTools {
           properties: {
             limit: { type: 'number', description: 'Maximum number to return', default: 20 },
             skip: { type: 'number', description: 'Number to skip', default: 0 }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
           }
         }
       },
@@ -671,7 +874,14 @@ export class CalendarTools {
             quantity: { type: 'number', description: 'Total quantity available' },
             outOfService: { type: 'number', description: 'Number currently out of service' },
             capacity: { type: 'number', description: 'Room capacity' },
-            calendarIds: { type: 'array', items: { type: 'string' }, description: 'Associated calendar IDs' }
+            calendarIds: { type: 'array', items: { type: 'string' }, description: 'Associated calendar IDs' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name', 'description', 'quantity', 'outOfService', 'capacity', 'calendarIds']
         }
@@ -682,7 +892,14 @@ export class CalendarTools {
         inputSchema: {
           type: 'object',
           properties: {
-            resourceId: { type: 'string', description: 'Room resource ID' }
+            resourceId: { type: 'string', description: 'Room resource ID' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['resourceId']
         }
@@ -700,7 +917,14 @@ export class CalendarTools {
             outOfService: { type: 'number', description: 'Number currently out of service' },
             capacity: { type: 'number', description: 'Room capacity' },
             calendarIds: { type: 'array', items: { type: 'string' }, description: 'Associated calendar IDs' },
-            isActive: { type: 'boolean', description: 'Whether resource is active' }
+            isActive: { type: 'boolean', description: 'Whether resource is active' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['resourceId']
         }
@@ -711,7 +935,14 @@ export class CalendarTools {
         inputSchema: {
           type: 'object',
           properties: {
-            resourceId: { type: 'string', description: 'Room resource ID' }
+            resourceId: { type: 'string', description: 'Room resource ID' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['resourceId']
         }
@@ -726,7 +957,14 @@ export class CalendarTools {
             isActive: { type: 'boolean', description: 'Filter by active status' },
             deleted: { type: 'boolean', description: 'Include deleted notifications' },
             limit: { type: 'number', description: 'Maximum number to return' },
-            skip: { type: 'number', description: 'Number to skip' }
+            skip: { type: 'number', description: 'Number to skip' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['calendarId']
         }
@@ -749,7 +987,14 @@ export class CalendarTools {
                   isActive: { type: 'boolean', description: 'Whether notification is active' },
                   templateId: { type: 'string', description: 'Template ID' },
                   body: { type: 'string', description: 'Notification body' },
-                  subject: { type: 'string', description: 'Notification subject' }
+                  subject: { type: 'string', description: 'Notification subject' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
                 },
                 required: ['receiverType', 'channel', 'notificationType']
               },
@@ -766,7 +1011,14 @@ export class CalendarTools {
           type: 'object',
           properties: {
             calendarId: { type: 'string', description: 'Calendar ID' },
-            notificationId: { type: 'string', description: 'Notification ID' }
+            notificationId: { type: 'string', description: 'Notification ID' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['calendarId', 'notificationId']
         }
@@ -786,7 +1038,14 @@ export class CalendarTools {
             deleted: { type: 'boolean', description: 'Whether notification is deleted' },
             templateId: { type: 'string', description: 'Template ID' },
             body: { type: 'string', description: 'Notification body' },
-            subject: { type: 'string', description: 'Notification subject' }
+            subject: { type: 'string', description: 'Notification subject' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['calendarId', 'notificationId']
         }
@@ -798,7 +1057,14 @@ export class CalendarTools {
           type: 'object',
           properties: {
             calendarId: { type: 'string', description: 'Calendar ID' },
-            notificationId: { type: 'string', description: 'Notification ID' }
+            notificationId: { type: 'string', description: 'Notification ID' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['calendarId', 'notificationId']
         }
@@ -813,7 +1079,14 @@ export class CalendarTools {
             calendarId: { type: 'string', description: 'Filter by calendar ID' },
             groupId: { type: 'string', description: 'Filter by group ID' },
             startTime: { type: 'string', description: 'Start time for the query range' },
-            endTime: { type: 'string', description: 'End time for the query range' }
+            endTime: { type: 'string', description: 'End time for the query range' },
+        _meta: {
+          labels: {
+            category: "calendar",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startTime', 'endTime']
         }

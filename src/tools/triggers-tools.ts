@@ -22,6 +22,13 @@ export class TriggersTools {
             limit: { type: 'number', description: 'Max results' },
             offset: { type: 'number', description: 'Pagination offset' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -31,7 +38,14 @@ export class TriggersTools {
           type: 'object',
           properties: {
             triggerId: { type: 'string', description: 'Trigger ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['triggerId']
         }
@@ -63,7 +77,14 @@ export class TriggersTools {
                   field: { type: 'string', description: 'Field to filter' },
                   operator: { type: 'string', description: 'Comparison operator' },
                   value: { type: 'string', description: 'Filter value' }
-                }
+                },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "write",
+            complexity: "simple"
+          }
+        }
               },
               description: 'Conditions that must be met'
             },
@@ -93,7 +114,14 @@ export class TriggersTools {
             name: { type: 'string', description: 'Trigger name' },
             filters: { type: 'array', description: 'Filter conditions' },
             actions: { type: 'array', description: 'Actions to perform' },
-            status: { type: 'string', enum: ['active', 'inactive'], description: 'Trigger status' }
+            status: { type: 'string', enum: ['active', 'inactive'], description: 'Trigger status' },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['triggerId']
         }
@@ -105,7 +133,14 @@ export class TriggersTools {
           type: 'object',
           properties: {
             triggerId: { type: 'string', description: 'Trigger ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['triggerId']
         }
@@ -117,7 +152,14 @@ export class TriggersTools {
           type: 'object',
           properties: {
             triggerId: { type: 'string', description: 'Trigger ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['triggerId']
         }
@@ -129,7 +171,14 @@ export class TriggersTools {
           type: 'object',
           properties: {
             triggerId: { type: 'string', description: 'Trigger ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['triggerId']
         }
@@ -141,6 +190,13 @@ export class TriggersTools {
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'Location ID' }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "read",
+            complexity: "simple"
           }
         }
       },
@@ -156,7 +212,14 @@ export class TriggersTools {
             startDate: { type: 'string', description: 'Start date' },
             endDate: { type: 'string', description: 'End date' },
             limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
+            offset: { type: 'number', description: 'Pagination offset' },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['triggerId']
         }
@@ -169,7 +232,14 @@ export class TriggersTools {
           properties: {
             triggerId: { type: 'string', description: 'Trigger ID' },
             locationId: { type: 'string', description: 'Location ID' },
-            testData: { type: 'object', description: 'Sample data to test with' }
+            testData: { type: 'object', description: 'Sample data to test with' },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['triggerId']
         }
@@ -182,7 +252,14 @@ export class TriggersTools {
           properties: {
             triggerId: { type: 'string', description: 'Trigger ID to duplicate' },
             locationId: { type: 'string', description: 'Location ID' },
-            name: { type: 'string', description: 'Name for the duplicate' }
+            name: { type: 'string', description: 'Name for the duplicate' },
+        _meta: {
+          labels: {
+            category: "triggers",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['triggerId']
         }

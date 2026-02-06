@@ -20,6 +20,13 @@ export class SmartListsTools {
             limit: { type: 'number', description: 'Max results' },
             offset: { type: 'number', description: 'Pagination offset' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "smartlists",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -29,7 +36,14 @@ export class SmartListsTools {
           type: 'object',
           properties: {
             smartListId: { type: 'string', description: 'Smart List ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "smartlists",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['smartListId']
         }
@@ -50,7 +64,14 @@ export class SmartListsTools {
                   field: { type: 'string', description: 'Field to filter on' },
                   operator: { type: 'string', description: 'Comparison operator (equals, contains, etc.)' },
                   value: { type: 'string', description: 'Filter value' }
-                }
+                },
+        _meta: {
+          labels: {
+            category: "smartlists",
+            access: "write",
+            complexity: "simple"
+          }
+        }
               },
               description: 'Filter conditions'
             },
@@ -69,7 +90,14 @@ export class SmartListsTools {
             locationId: { type: 'string', description: 'Location ID' },
             name: { type: 'string', description: 'Smart list name' },
             filters: { type: 'array', description: 'Filter conditions' },
-            filterOperator: { type: 'string', enum: ['AND', 'OR'], description: 'How to combine filters' }
+            filterOperator: { type: 'string', enum: ['AND', 'OR'], description: 'How to combine filters' },
+        _meta: {
+          labels: {
+            category: "smartlists",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['smartListId']
         }
@@ -81,7 +109,14 @@ export class SmartListsTools {
           type: 'object',
           properties: {
             smartListId: { type: 'string', description: 'Smart List ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "smartlists",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['smartListId']
         }
@@ -95,7 +130,14 @@ export class SmartListsTools {
             smartListId: { type: 'string', description: 'Smart List ID' },
             locationId: { type: 'string', description: 'Location ID' },
             limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
+            offset: { type: 'number', description: 'Pagination offset' },
+        _meta: {
+          labels: {
+            category: "smartlists",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['smartListId']
         }
@@ -107,7 +149,14 @@ export class SmartListsTools {
           type: 'object',
           properties: {
             smartListId: { type: 'string', description: 'Smart List ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "smartlists",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['smartListId']
         }
@@ -120,7 +169,14 @@ export class SmartListsTools {
           properties: {
             smartListId: { type: 'string', description: 'Smart List ID to duplicate' },
             locationId: { type: 'string', description: 'Location ID' },
-            name: { type: 'string', description: 'Name for the duplicate' }
+            name: { type: 'string', description: 'Name for the duplicate' },
+        _meta: {
+          labels: {
+            category: "smartlists",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['smartListId']
         }

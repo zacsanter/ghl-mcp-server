@@ -22,6 +22,13 @@ export class CampaignsTools {
             limit: { type: 'number', description: 'Max results' },
             offset: { type: 'number', description: 'Pagination offset' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -31,7 +38,14 @@ export class CampaignsTools {
           type: 'object',
           properties: {
             campaignId: { type: 'string', description: 'Campaign ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['campaignId']
         }
@@ -45,7 +59,14 @@ export class CampaignsTools {
             locationId: { type: 'string', description: 'Location ID' },
             name: { type: 'string', description: 'Campaign name' },
             type: { type: 'string', enum: ['email', 'sms', 'voicemail'], description: 'Campaign type' },
-            status: { type: 'string', enum: ['draft', 'scheduled'], description: 'Initial status' }
+            status: { type: 'string', enum: ['draft', 'scheduled'], description: 'Initial status' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name', 'type']
         }
@@ -59,7 +80,14 @@ export class CampaignsTools {
             campaignId: { type: 'string', description: 'Campaign ID' },
             locationId: { type: 'string', description: 'Location ID' },
             name: { type: 'string', description: 'Campaign name' },
-            status: { type: 'string', enum: ['draft', 'scheduled', 'paused'], description: 'Campaign status' }
+            status: { type: 'string', enum: ['draft', 'scheduled', 'paused'], description: 'Campaign status' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['campaignId']
         }
@@ -71,7 +99,14 @@ export class CampaignsTools {
           type: 'object',
           properties: {
             campaignId: { type: 'string', description: 'Campaign ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['campaignId']
         }
@@ -85,7 +120,14 @@ export class CampaignsTools {
           type: 'object',
           properties: {
             campaignId: { type: 'string', description: 'Campaign ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['campaignId']
         }
@@ -97,7 +139,14 @@ export class CampaignsTools {
           type: 'object',
           properties: {
             campaignId: { type: 'string', description: 'Campaign ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['campaignId']
         }
@@ -109,7 +158,14 @@ export class CampaignsTools {
           type: 'object',
           properties: {
             campaignId: { type: 'string', description: 'Campaign ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['campaignId']
         }
@@ -123,7 +179,14 @@ export class CampaignsTools {
           type: 'object',
           properties: {
             campaignId: { type: 'string', description: 'Campaign ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['campaignId']
         }
@@ -138,7 +201,14 @@ export class CampaignsTools {
             locationId: { type: 'string', description: 'Location ID' },
             status: { type: 'string', enum: ['sent', 'delivered', 'opened', 'clicked', 'bounced', 'unsubscribed'], description: 'Filter by recipient status' },
             limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
+            offset: { type: 'number', description: 'Pagination offset' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['campaignId']
         }
@@ -155,6 +225,13 @@ export class CampaignsTools {
             contactId: { type: 'string', description: 'Filter by contact ID' },
             campaignId: { type: 'string', description: 'Filter by campaign ID' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -164,7 +241,14 @@ export class CampaignsTools {
           type: 'object',
           properties: {
             messageId: { type: 'string', description: 'Scheduled message ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "campaigns",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['messageId']
         }

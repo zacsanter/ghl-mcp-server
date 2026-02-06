@@ -69,7 +69,14 @@ export class ConversationTools {
             fromNumber: {
               type: 'string',
               description: 'Optional: Phone number to send from (must be configured in GHL)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['contactId', 'message']
         }
@@ -115,7 +122,14 @@ export class ConversationTools {
               type: 'array',
               items: { type: 'string' },
               description: 'Optional: Array of BCC email addresses'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['contactId', 'subject']
         }
@@ -152,6 +166,13 @@ export class ConversationTools {
               description: 'Filter by user ID assigned to conversations'
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -181,7 +202,14 @@ export class ConversationTools {
                 ]
               },
               description: 'Filter messages by type (optional)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['conversationId']
         }
@@ -195,7 +223,14 @@ export class ConversationTools {
             contactId: {
               type: 'string',
               description: 'The unique ID of the contact to create conversation with'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['contactId']
         }
@@ -218,7 +253,14 @@ export class ConversationTools {
               type: 'number',
               description: 'Set the unread message count (0 to mark as read)',
               minimum: 0
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['conversationId']
         }
@@ -243,6 +285,13 @@ export class ConversationTools {
               default: 'unread'
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -254,7 +303,14 @@ export class ConversationTools {
             conversationId: {
               type: 'string',
               description: 'The unique ID of the conversation to delete'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['conversationId']
         }
@@ -270,7 +326,14 @@ export class ConversationTools {
             emailMessageId: {
               type: 'string',
               description: 'The unique ID of the email message to retrieve'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['emailMessageId']
         }
@@ -284,7 +347,14 @@ export class ConversationTools {
             messageId: {
               type: 'string',
               description: 'The unique ID of the message to retrieve'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['messageId']
         }
@@ -303,7 +373,14 @@ export class ConversationTools {
               type: 'array',
               items: { type: 'string' },
               description: 'Array of file URLs to upload as attachments'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['conversationId', 'attachmentUrls']
         }
@@ -330,7 +407,14 @@ export class ConversationTools {
                 code: { type: 'string' },
                 type: { type: 'string' },
                 message: { type: 'string' }
-              }
+              },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
             },
             emailMessageId: {
               type: 'string',
@@ -425,7 +509,14 @@ export class ConversationTools {
                   description: 'Call status'
                 }
               }
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['type', 'conversationId', 'conversationProviderId']
         }
@@ -469,7 +560,14 @@ export class ConversationTools {
             date: {
               type: 'string',
               description: 'Date of the call (ISO format)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['conversationId', 'conversationProviderId', 'to', 'from', 'status']
         }
@@ -485,7 +583,14 @@ export class ConversationTools {
             messageId: {
               type: 'string',
               description: 'The unique ID of the call message to get recording for'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['messageId']
         }
@@ -499,7 +604,14 @@ export class ConversationTools {
             messageId: {
               type: 'string',
               description: 'The unique ID of the call message to get transcription for'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['messageId']
         }
@@ -513,7 +625,14 @@ export class ConversationTools {
             messageId: {
               type: 'string',
               description: 'The unique ID of the call message to download transcription for'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['messageId']
         }
@@ -529,7 +648,14 @@ export class ConversationTools {
             messageId: {
               type: 'string',
               description: 'The unique ID of the scheduled message to cancel'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['messageId']
         }
@@ -543,7 +669,14 @@ export class ConversationTools {
             emailMessageId: {
               type: 'string',
               description: 'The unique ID of the scheduled email to cancel'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['emailMessageId']
         }
@@ -567,7 +700,14 @@ export class ConversationTools {
             isTyping: {
               type: 'boolean',
               description: 'Whether the agent is currently typing'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "conversations",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['visitorId', 'conversationId', 'isTyping']
         }

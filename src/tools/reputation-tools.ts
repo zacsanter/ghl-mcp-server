@@ -26,6 +26,13 @@ export class ReputationTools {
             limit: { type: 'number', description: 'Max results' },
             offset: { type: 'number', description: 'Pagination offset' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -35,7 +42,14 @@ export class ReputationTools {
           type: 'object',
           properties: {
             reviewId: { type: 'string', description: 'Review ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['reviewId']
         }
@@ -48,7 +62,14 @@ export class ReputationTools {
           properties: {
             reviewId: { type: 'string', description: 'Review ID' },
             locationId: { type: 'string', description: 'Location ID' },
-            reply: { type: 'string', description: 'Reply text' }
+            reply: { type: 'string', description: 'Reply text' },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['reviewId', 'reply']
         }
@@ -61,7 +82,14 @@ export class ReputationTools {
           properties: {
             reviewId: { type: 'string', description: 'Review ID' },
             locationId: { type: 'string', description: 'Location ID' },
-            reply: { type: 'string', description: 'Updated reply text' }
+            reply: { type: 'string', description: 'Updated reply text' },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['reviewId', 'reply']
         }
@@ -73,7 +101,14 @@ export class ReputationTools {
           type: 'object',
           properties: {
             reviewId: { type: 'string', description: 'Review ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['reviewId']
         }
@@ -91,6 +126,13 @@ export class ReputationTools {
             startDate: { type: 'string', description: 'Start date' },
             endDate: { type: 'string', description: 'End date' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
 
@@ -105,7 +147,14 @@ export class ReputationTools {
             contactId: { type: 'string', description: 'Contact ID to request review from' },
             platform: { type: 'string', enum: ['google', 'facebook', 'yelp'], description: 'Platform to request review on' },
             method: { type: 'string', enum: ['sms', 'email', 'both'], description: 'Delivery method' },
-            message: { type: 'string', description: 'Custom message (optional)' }
+            message: { type: 'string', description: 'Custom message (optional)' },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['contactId', 'platform', 'method']
         }
@@ -122,6 +171,13 @@ export class ReputationTools {
             limit: { type: 'number', description: 'Max results' },
             offset: { type: 'number', description: 'Pagination offset' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
 
@@ -134,6 +190,13 @@ export class ReputationTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -144,6 +207,13 @@ export class ReputationTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -153,7 +223,14 @@ export class ReputationTools {
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'Location ID' },
-            platform: { type: 'string', enum: ['google', 'facebook', 'yelp'], description: 'Platform to disconnect' }
+            platform: { type: 'string', enum: ['google', 'facebook', 'yelp'], description: 'Platform to disconnect' },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['platform']
         }
@@ -168,6 +245,13 @@ export class ReputationTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -181,6 +265,13 @@ export class ReputationTools {
             facebookLink: { type: 'string', description: 'Custom Facebook review link' },
             yelpLink: { type: 'string', description: 'Custom Yelp review link' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
 
@@ -192,6 +283,13 @@ export class ReputationTools {
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'Location ID' }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "reputation",
+            access: "write",
+            complexity: "simple"
           }
         }
       },

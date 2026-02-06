@@ -21,6 +21,13 @@ export class BusinessesTools {
               description: 'Location ID (uses default if not provided)'
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "businesses",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -36,7 +43,14 @@ export class BusinessesTools {
             locationId: {
               type: 'string',
               description: 'Location ID (uses default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "businesses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['businessId']
         }
@@ -94,7 +108,14 @@ export class BusinessesTools {
             logoUrl: {
               type: 'string',
               description: 'URL to business logo image'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "businesses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name']
         }
@@ -156,7 +177,14 @@ export class BusinessesTools {
             logoUrl: {
               type: 'string',
               description: 'URL to business logo image'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "businesses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['businessId']
         }
@@ -174,7 +202,14 @@ export class BusinessesTools {
             locationId: {
               type: 'string',
               description: 'Location ID (uses default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "businesses",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['businessId']
         }

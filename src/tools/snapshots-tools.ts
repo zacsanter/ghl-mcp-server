@@ -27,7 +27,14 @@ export class SnapshotsTools {
             limit: {
               type: 'number',
               description: 'Maximum number of snapshots to return'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "snapshots",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId']
         }
@@ -45,7 +52,14 @@ export class SnapshotsTools {
             companyId: {
               type: 'string',
               description: 'Company/Agency ID'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "snapshots",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['snapshotId', 'companyId']
         }
@@ -71,7 +85,14 @@ export class SnapshotsTools {
             description: {
               type: 'string',
               description: 'Description of the snapshot'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "snapshots",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['companyId', 'locationId', 'name']
         }
@@ -93,7 +114,14 @@ export class SnapshotsTools {
             pushId: {
               type: 'string',
               description: 'The push operation ID'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "snapshots",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['snapshotId', 'companyId']
         }
@@ -115,7 +143,14 @@ export class SnapshotsTools {
             locationId: {
               type: 'string',
               description: 'Target location ID'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "snapshots",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['snapshotId', 'companyId', 'locationId']
         }
@@ -150,7 +185,14 @@ export class SnapshotsTools {
                 surveys: { type: 'boolean', description: 'Override existing surveys' },
                 calendars: { type: 'boolean', description: 'Override existing calendars' },
                 automations: { type: 'boolean', description: 'Override existing automations' },
-                triggers: { type: 'boolean', description: 'Override existing triggers' }
+                triggers: { type: 'boolean', description: 'Override existing triggers' },
+        _meta: {
+          labels: {
+            category: "snapshots",
+            access: "read",
+            complexity: "simple"
+          }
+        }
               },
               description: 'What to override vs skip'
             }

@@ -21,6 +21,13 @@ export class CoursesTools {
             limit: { type: 'number', description: 'Max results to return' },
             offset: { type: 'number', description: 'Offset for pagination' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -32,7 +39,14 @@ export class CoursesTools {
             locationId: { type: 'string', description: 'Location ID' },
             name: { type: 'string', description: 'Import job name' },
             sourceUrl: { type: 'string', description: 'Source URL to import from' },
-            type: { type: 'string', description: 'Import type' }
+            type: { type: 'string', description: 'Import type' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name']
         }
@@ -49,6 +63,13 @@ export class CoursesTools {
             limit: { type: 'number', description: 'Max results' },
             offset: { type: 'number', description: 'Pagination offset' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -58,7 +79,14 @@ export class CoursesTools {
           type: 'object',
           properties: {
             productId: { type: 'string', description: 'Course product ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['productId']
         }
@@ -73,7 +101,14 @@ export class CoursesTools {
             title: { type: 'string', description: 'Product title' },
             description: { type: 'string', description: 'Product description' },
             imageUrl: { type: 'string', description: 'Product image URL' },
-            statementDescriptor: { type: 'string', description: 'Payment statement descriptor' }
+            statementDescriptor: { type: 'string', description: 'Payment statement descriptor' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['title']
         }
@@ -88,7 +123,14 @@ export class CoursesTools {
             locationId: { type: 'string', description: 'Location ID' },
             title: { type: 'string', description: 'Product title' },
             description: { type: 'string', description: 'Product description' },
-            imageUrl: { type: 'string', description: 'Product image URL' }
+            imageUrl: { type: 'string', description: 'Product image URL' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['productId']
         }
@@ -100,7 +142,14 @@ export class CoursesTools {
           type: 'object',
           properties: {
             productId: { type: 'string', description: 'Course product ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['productId']
         }
@@ -117,6 +166,13 @@ export class CoursesTools {
             limit: { type: 'number', description: 'Max results' },
             offset: { type: 'number', description: 'Pagination offset' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -126,7 +182,14 @@ export class CoursesTools {
           type: 'object',
           properties: {
             locationId: { type: 'string', description: 'Location ID' },
-            title: { type: 'string', description: 'Category title' }
+            title: { type: 'string', description: 'Category title' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['title']
         }
@@ -139,7 +202,14 @@ export class CoursesTools {
           properties: {
             categoryId: { type: 'string', description: 'Category ID' },
             locationId: { type: 'string', description: 'Location ID' },
-            title: { type: 'string', description: 'Category title' }
+            title: { type: 'string', description: 'Category title' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['categoryId', 'title']
         }
@@ -151,7 +221,14 @@ export class CoursesTools {
           type: 'object',
           properties: {
             categoryId: { type: 'string', description: 'Category ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['categoryId']
         }
@@ -169,6 +246,13 @@ export class CoursesTools {
             offset: { type: 'number', description: 'Pagination offset' },
             categoryId: { type: 'string', description: 'Filter by category' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -178,7 +262,14 @@ export class CoursesTools {
           type: 'object',
           properties: {
             courseId: { type: 'string', description: 'Course ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId']
         }
@@ -194,7 +285,14 @@ export class CoursesTools {
             description: { type: 'string', description: 'Course description' },
             thumbnailUrl: { type: 'string', description: 'Course thumbnail URL' },
             visibility: { type: 'string', enum: ['published', 'draft'], description: 'Course visibility' },
-            categoryId: { type: 'string', description: 'Category ID to place course in' }
+            categoryId: { type: 'string', description: 'Category ID to place course in' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['title']
         }
@@ -210,7 +308,14 @@ export class CoursesTools {
             title: { type: 'string', description: 'Course title' },
             description: { type: 'string', description: 'Course description' },
             thumbnailUrl: { type: 'string', description: 'Course thumbnail URL' },
-            visibility: { type: 'string', enum: ['published', 'draft'], description: 'Course visibility' }
+            visibility: { type: 'string', enum: ['published', 'draft'], description: 'Course visibility' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId']
         }
@@ -222,7 +327,14 @@ export class CoursesTools {
           type: 'object',
           properties: {
             courseId: { type: 'string', description: 'Course ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId']
         }
@@ -236,7 +348,14 @@ export class CoursesTools {
           type: 'object',
           properties: {
             courseId: { type: 'string', description: 'Course ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId']
         }
@@ -251,7 +370,14 @@ export class CoursesTools {
             locationId: { type: 'string', description: 'Location ID' },
             userId: { type: 'string', description: 'User ID of instructor' },
             name: { type: 'string', description: 'Instructor display name' },
-            bio: { type: 'string', description: 'Instructor bio' }
+            bio: { type: 'string', description: 'Instructor bio' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId']
         }
@@ -267,7 +393,14 @@ export class CoursesTools {
             courseId: { type: 'string', description: 'Course ID' },
             locationId: { type: 'string', description: 'Location ID' },
             limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
+            offset: { type: 'number', description: 'Pagination offset' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId']
         }
@@ -280,7 +413,14 @@ export class CoursesTools {
           properties: {
             courseId: { type: 'string', description: 'Course ID' },
             postId: { type: 'string', description: 'Post/Lesson ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId', 'postId']
         }
@@ -297,7 +437,14 @@ export class CoursesTools {
             contentType: { type: 'string', enum: ['video', 'text', 'quiz', 'assignment'], description: 'Content type' },
             content: { type: 'string', description: 'Post content (text/HTML)' },
             videoUrl: { type: 'string', description: 'Video URL (if video type)' },
-            visibility: { type: 'string', enum: ['published', 'draft'], description: 'Visibility' }
+            visibility: { type: 'string', enum: ['published', 'draft'], description: 'Visibility' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId', 'title']
         }
@@ -314,7 +461,14 @@ export class CoursesTools {
             title: { type: 'string', description: 'Post/lesson title' },
             content: { type: 'string', description: 'Post content' },
             videoUrl: { type: 'string', description: 'Video URL' },
-            visibility: { type: 'string', enum: ['published', 'draft'], description: 'Visibility' }
+            visibility: { type: 'string', enum: ['published', 'draft'], description: 'Visibility' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId', 'postId']
         }
@@ -327,7 +481,14 @@ export class CoursesTools {
           properties: {
             courseId: { type: 'string', description: 'Course ID' },
             postId: { type: 'string', description: 'Post/Lesson ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId', 'postId']
         }
@@ -341,7 +502,14 @@ export class CoursesTools {
           type: 'object',
           properties: {
             productId: { type: 'string', description: 'Course product ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['productId']
         }
@@ -358,7 +526,14 @@ export class CoursesTools {
             price: { type: 'number', description: 'Price in cents' },
             currency: { type: 'string', description: 'Currency code (e.g., USD)' },
             type: { type: 'string', enum: ['one-time', 'subscription'], description: 'Payment type' },
-            interval: { type: 'string', enum: ['month', 'year'], description: 'Subscription interval (if subscription)' }
+            interval: { type: 'string', enum: ['month', 'year'], description: 'Subscription interval (if subscription)' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['productId', 'name', 'price']
         }
@@ -373,7 +548,14 @@ export class CoursesTools {
             offerId: { type: 'string', description: 'Offer ID' },
             locationId: { type: 'string', description: 'Location ID' },
             name: { type: 'string', description: 'Offer name' },
-            price: { type: 'number', description: 'Price in cents' }
+            price: { type: 'number', description: 'Price in cents' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['productId', 'offerId']
         }
@@ -386,7 +568,14 @@ export class CoursesTools {
           properties: {
             productId: { type: 'string', description: 'Course product ID' },
             offerId: { type: 'string', description: 'Offer ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['productId', 'offerId']
         }
@@ -402,7 +591,14 @@ export class CoursesTools {
             courseId: { type: 'string', description: 'Course ID' },
             locationId: { type: 'string', description: 'Location ID' },
             limit: { type: 'number', description: 'Max results' },
-            offset: { type: 'number', description: 'Pagination offset' }
+            offset: { type: 'number', description: 'Pagination offset' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId']
         }
@@ -415,7 +611,14 @@ export class CoursesTools {
           properties: {
             courseId: { type: 'string', description: 'Course ID' },
             contactId: { type: 'string', description: 'Contact ID to enroll' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId', 'contactId']
         }
@@ -428,7 +631,14 @@ export class CoursesTools {
           properties: {
             courseId: { type: 'string', description: 'Course ID' },
             contactId: { type: 'string', description: 'Contact ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId', 'contactId']
         }
@@ -443,7 +653,14 @@ export class CoursesTools {
           properties: {
             courseId: { type: 'string', description: 'Course ID' },
             contactId: { type: 'string', description: 'Contact/Student ID' },
-            locationId: { type: 'string', description: 'Location ID' }
+            locationId: { type: 'string', description: 'Location ID' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId', 'contactId']
         }
@@ -458,7 +675,14 @@ export class CoursesTools {
             postId: { type: 'string', description: 'Post/Lesson ID' },
             contactId: { type: 'string', description: 'Contact/Student ID' },
             locationId: { type: 'string', description: 'Location ID' },
-            completed: { type: 'boolean', description: 'Whether lesson is completed' }
+            completed: { type: 'boolean', description: 'Whether lesson is completed' },
+        _meta: {
+          labels: {
+            category: "courses",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['courseId', 'postId', 'contactId', 'completed']
         }

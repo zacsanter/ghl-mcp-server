@@ -81,6 +81,13 @@ export class ContactTools {
             source: { type: 'string', description: 'Source of the contact' }
           },
           required: ['email']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -94,6 +101,13 @@ export class ContactTools {
             phone: { type: 'string', description: 'Filter by phone number' },
             limit: { type: 'number', description: 'Maximum number of results (default: 25)' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -105,6 +119,13 @@ export class ContactTools {
             contactId: { type: 'string', description: 'Contact ID' }
           },
           required: ['contactId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -121,6 +142,13 @@ export class ContactTools {
             tags: { type: 'array', items: { type: 'string' }, description: 'Tags to assign to contact' }
           },
           required: ['contactId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -132,6 +160,13 @@ export class ContactTools {
             contactId: { type: 'string', description: 'Contact ID' }
           },
           required: ['contactId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "delete",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -144,6 +179,13 @@ export class ContactTools {
             tags: { type: 'array', items: { type: 'string' }, description: 'Tags to add' }
           },
           required: ['contactId', 'tags']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -156,6 +198,13 @@ export class ContactTools {
             tags: { type: 'array', items: { type: 'string' }, description: 'Tags to remove' }
           },
           required: ['contactId', 'tags']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
 
@@ -169,6 +218,13 @@ export class ContactTools {
             contactId: { type: 'string', description: 'Contact ID' }
           },
           required: ['contactId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -185,6 +241,13 @@ export class ContactTools {
             assignedTo: { type: 'string', description: 'User ID to assign task to' }
           },
           required: ['contactId', 'title', 'dueDate']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -197,6 +260,13 @@ export class ContactTools {
             taskId: { type: 'string', description: 'Task ID' }
           },
           required: ['contactId', 'taskId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -214,6 +284,13 @@ export class ContactTools {
             assignedTo: { type: 'string', description: 'User ID to assign task to' }
           },
           required: ['contactId', 'taskId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -226,6 +303,13 @@ export class ContactTools {
             taskId: { type: 'string', description: 'Task ID' }
           },
           required: ['contactId', 'taskId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "delete",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -239,6 +323,13 @@ export class ContactTools {
             completed: { type: 'boolean', description: 'Completion status' }
           },
           required: ['contactId', 'taskId', 'completed']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
 
@@ -252,6 +343,13 @@ export class ContactTools {
             contactId: { type: 'string', description: 'Contact ID' }
           },
           required: ['contactId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -265,6 +363,13 @@ export class ContactTools {
             userId: { type: 'string', description: 'User ID creating the note' }
           },
           required: ['contactId', 'body']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -277,6 +382,13 @@ export class ContactTools {
             noteId: { type: 'string', description: 'Note ID' }
           },
           required: ['contactId', 'noteId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -291,6 +403,13 @@ export class ContactTools {
             userId: { type: 'string', description: 'User ID updating the note' }
           },
           required: ['contactId', 'noteId', 'body']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -303,6 +422,13 @@ export class ContactTools {
             noteId: { type: 'string', description: 'Note ID' }
           },
           required: ['contactId', 'noteId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "delete",
+            complexity: "simple"
+          }
         }
       },
 
@@ -321,6 +447,13 @@ export class ContactTools {
             source: { type: 'string', description: 'Source of the contact' },
             assignedTo: { type: 'string', description: 'User ID to assign contact to' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "complex"
+          }
         }
       },
       {
@@ -331,6 +464,13 @@ export class ContactTools {
           properties: {
             email: { type: 'string', description: 'Email to check for duplicates' },
             phone: { type: 'string', description: 'Phone to check for duplicates' }
+          }
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "read",
+            complexity: "simple"
           }
         }
       },
@@ -346,6 +486,13 @@ export class ContactTools {
             query: { type: 'string', description: 'Search query' }
           },
           required: ['businessId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -357,6 +504,13 @@ export class ContactTools {
             contactId: { type: 'string', description: 'Contact ID' }
           },
           required: ['contactId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
 
@@ -373,6 +527,13 @@ export class ContactTools {
             removeAllTags: { type: 'boolean', description: 'Remove all existing tags before adding new ones' }
           },
           required: ['contactIds', 'tags', 'operation']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "batch"
+          }
         }
       },
       {
@@ -385,6 +546,13 @@ export class ContactTools {
             businessId: { type: 'string', description: 'Business ID (null to remove from business)' }
           },
           required: ['contactIds']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "batch"
+          }
         }
       },
 
@@ -399,6 +567,13 @@ export class ContactTools {
             followers: { type: 'array', items: { type: 'string' }, description: 'Array of user IDs to add as followers' }
           },
           required: ['contactId', 'followers']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -411,6 +586,13 @@ export class ContactTools {
             followers: { type: 'array', items: { type: 'string' }, description: 'Array of user IDs to remove as followers' }
           },
           required: ['contactId', 'followers']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
 
@@ -425,6 +607,13 @@ export class ContactTools {
             campaignId: { type: 'string', description: 'Campaign ID' }
           },
           required: ['contactId', 'campaignId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -437,6 +626,13 @@ export class ContactTools {
             campaignId: { type: 'string', description: 'Campaign ID' }
           },
           required: ['contactId', 'campaignId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -448,6 +644,13 @@ export class ContactTools {
             contactId: { type: 'string', description: 'Contact ID' }
           },
           required: ['contactId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "batch"
+          }
         }
       },
 
@@ -463,6 +666,13 @@ export class ContactTools {
             eventStartTime: { type: 'string', description: 'Event start time (ISO format)' }
           },
           required: ['contactId', 'workflowId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -476,6 +686,13 @@ export class ContactTools {
             eventStartTime: { type: 'string', description: 'Event start time (ISO format)' }
           },
           required: ['contactId', 'workflowId']
+        },
+        _meta: {
+          labels: {
+            category: "contacts",
+            access: "write",
+            complexity: "simple"
+          }
         }
       }
     ];

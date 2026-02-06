@@ -19,7 +19,14 @@ export class ReportingTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' },
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
-            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' }
+            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -36,7 +43,14 @@ export class ReportingTools {
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
             endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
             userId: { type: 'string', description: 'Filter by user ID' },
-            type: { type: 'string', enum: ['inbound', 'outbound', 'all'], description: 'Call type filter' }
+            type: { type: 'string', enum: ['inbound', 'outbound', 'all'], description: 'Call type filter' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "batch"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -53,7 +67,14 @@ export class ReportingTools {
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
             endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
             calendarId: { type: 'string', description: 'Filter by calendar ID' },
-            status: { type: 'string', enum: ['booked', 'confirmed', 'showed', 'noshow', 'cancelled'], description: 'Appointment status filter' }
+            status: { type: 'string', enum: ['booked', 'confirmed', 'showed', 'noshow', 'cancelled'], description: 'Appointment status filter' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -70,7 +91,14 @@ export class ReportingTools {
             pipelineId: { type: 'string', description: 'Filter by pipeline ID' },
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
             endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
-            userId: { type: 'string', description: 'Filter by assigned user' }
+            userId: { type: 'string', description: 'Filter by assigned user' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -85,7 +113,14 @@ export class ReportingTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' },
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
-            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' }
+            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -98,7 +133,14 @@ export class ReportingTools {
           properties: {
             locationId: { type: 'string', description: 'Location ID' },
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
-            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' }
+            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -114,7 +156,14 @@ export class ReportingTools {
             locationId: { type: 'string', description: 'Location ID' },
             funnelId: { type: 'string', description: 'Filter by funnel ID' },
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
-            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' }
+            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -130,7 +179,14 @@ export class ReportingTools {
             locationId: { type: 'string', description: 'Location ID' },
             platform: { type: 'string', enum: ['google', 'facebook', 'all'], description: 'Ad platform' },
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
-            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' }
+            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -146,7 +202,14 @@ export class ReportingTools {
             locationId: { type: 'string', description: 'Location ID' },
             userId: { type: 'string', description: 'Filter by user ID' },
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
-            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' }
+            endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -164,6 +227,13 @@ export class ReportingTools {
             startDate: { type: 'string', description: 'Start date for custom range' },
             endDate: { type: 'string', description: 'End date for custom range' }
           }
+        },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
 
@@ -177,7 +247,14 @@ export class ReportingTools {
             locationId: { type: 'string', description: 'Location ID' },
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
             endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
-            source: { type: 'string', description: 'Filter by source' }
+            source: { type: 'string', description: 'Filter by source' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }
@@ -193,7 +270,14 @@ export class ReportingTools {
             locationId: { type: 'string', description: 'Location ID' },
             startDate: { type: 'string', description: 'Start date (YYYY-MM-DD)' },
             endDate: { type: 'string', description: 'End date (YYYY-MM-DD)' },
-            groupBy: { type: 'string', enum: ['day', 'week', 'month'], description: 'Group results by' }
+            groupBy: { type: 'string', enum: ['day', 'week', 'month'], description: 'Group results by' },
+        _meta: {
+          labels: {
+            category: "analytics",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['startDate', 'endDate']
         }

@@ -26,7 +26,14 @@ export class CustomFieldV2Tools {
             id: {
               type: 'string',
               description: 'The ID of the custom field or folder to retrieve'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "custom-fields",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['id']
         }
@@ -74,7 +81,14 @@ export class CustomFieldV2Tools {
                   url: {
                     type: 'string',
                     description: 'URL associated with the option (only for RADIO type)'
-                  }
+                  },
+        _meta: {
+          labels: {
+            category: "custom-fields",
+            access: "write",
+            complexity: "simple"
+          }
+        }
                 },
                 required: ['key', 'label']
               },
@@ -160,7 +174,14 @@ export class CustomFieldV2Tools {
                   url: {
                     type: 'string',
                     description: 'URL associated with the option (only for RADIO type)'
-                  }
+                  },
+        _meta: {
+          labels: {
+            category: "custom-fields",
+            access: "write",
+            complexity: "simple"
+          }
+        }
                 },
                 required: ['key', 'label']
               },
@@ -188,7 +209,14 @@ export class CustomFieldV2Tools {
             id: {
               type: 'string',
               description: 'The ID of the custom field to delete'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "custom-fields",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['id']
         }
@@ -206,7 +234,14 @@ export class CustomFieldV2Tools {
             locationId: {
               type: 'string',
               description: 'GoHighLevel location ID (will use default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "custom-fields",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['objectKey']
         }
@@ -229,7 +264,14 @@ export class CustomFieldV2Tools {
             locationId: {
               type: 'string',
               description: 'GoHighLevel location ID (will use default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "custom-fields",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['objectKey', 'name']
         }
@@ -251,7 +293,14 @@ export class CustomFieldV2Tools {
             locationId: {
               type: 'string',
               description: 'GoHighLevel location ID (will use default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "custom-fields",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['id', 'name']
         }
@@ -269,7 +318,14 @@ export class CustomFieldV2Tools {
             locationId: {
               type: 'string',
               description: 'GoHighLevel location ID (will use default if not provided)'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "custom-fields",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['id']
         }

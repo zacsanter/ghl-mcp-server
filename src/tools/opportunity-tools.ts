@@ -69,6 +69,13 @@ export class OpportunityTools {
               default: 20
             }
           }
+        },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -77,6 +84,13 @@ export class OpportunityTools {
         inputSchema: {
           type: 'object',
           properties: {}
+        },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "read",
+            complexity: "simple"
+          }
         }
       },
       {
@@ -88,7 +102,14 @@ export class OpportunityTools {
             opportunityId: {
               type: 'string',
               description: 'The unique ID of the opportunity to retrieve'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "read",
+            complexity: "simple"
+          }
+        }
           },
           required: ['opportunityId']
         }
@@ -124,7 +145,14 @@ export class OpportunityTools {
             assignedTo: {
               type: 'string',
               description: 'User ID to assign this opportunity to'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['name', 'pipelineId', 'contactId']
         }
@@ -143,7 +171,14 @@ export class OpportunityTools {
               type: 'string',
               description: 'New status for the opportunity',
               enum: ['open', 'won', 'lost', 'abandoned']
-            }
+            },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['opportunityId', 'status']
         }
@@ -157,7 +192,14 @@ export class OpportunityTools {
             opportunityId: {
               type: 'string',
               description: 'The unique ID of the opportunity to delete'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "delete",
+            complexity: "simple"
+          }
+        }
           },
           required: ['opportunityId']
         }
@@ -196,7 +238,14 @@ export class OpportunityTools {
             assignedTo: {
               type: 'string',
               description: 'Updated assigned user ID'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['opportunityId']
         }
@@ -236,7 +285,14 @@ export class OpportunityTools {
             assignedTo: {
               type: 'string',
               description: 'User ID to assign this opportunity to'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "write",
+            complexity: "complex"
+          }
+        }
           },
           required: ['pipelineId', 'contactId']
         }
@@ -255,7 +311,14 @@ export class OpportunityTools {
               type: 'array',
               items: { type: 'string' },
               description: 'Array of user IDs to add as followers'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['opportunityId', 'followers']
         }
@@ -274,7 +337,14 @@ export class OpportunityTools {
               type: 'array',
               items: { type: 'string' },
               description: 'Array of user IDs to remove as followers'
-            }
+            },
+        _meta: {
+          labels: {
+            category: "deals",
+            access: "write",
+            complexity: "simple"
+          }
+        }
           },
           required: ['opportunityId', 'followers']
         }
