@@ -192,6 +192,33 @@ export class ToolRegistry {
   }
 
   /**
+   * Get a single tool's full definition (including inputSchema).
+   * Returns undefined if tool doesn't exist.
+   */
+  getToolDefinition(name: string): Tool | undefined {
+    return this.tools.get(name)?.definition;
+  }
+
+  /**
+   * Get the category a tool belongs to.
+   */
+  getToolCategory(name: string): string | undefined {
+    return this.tools.get(name)?.category;
+  }
+
+  /**
+   * Execute any registered tool by name, regardless of enabled/disabled status.
+   * Used by the ghl_execute proxy in stateless mode where dynamic tool lists aren't possible.
+   */
+  async executeToolDirect(name: string, args: Record<string, unknown>): Promise<unknown> {
+    const entry = this.tools.get(name);
+    if (!entry) {
+      throw new Error(`Unknown tool: "${name}". Use search_tools to find available tools.`);
+    }
+    return entry.executor(name, args);
+  }
+
+  /**
    * Get all categories with metadata (for list_categories).
    */
   getCategories(): CategoryInfo[] {
