@@ -1,7 +1,16 @@
 /**
  * Discovery Tools
- * The 6 always-on meta tools that let Claude explore and enable tool categories.
- * These are always visible regardless of which categories are enabled/disabled.
+ *
+ * Three always-on meta-tools for the GoHighLevel MCP server:
+ *
+ * 1. list_categories  — Show all 38 tool categories with tool counts
+ * 2. search_tools     — Search tools by keyword, returns full input schemas
+ * 3. ghl_execute      — Proxy: execute any GHL tool by name + arguments
+ *
+ * This design works in stateless environments (Vercel / Claude.ai connectors)
+ * where the tool list is fetched once and cannot be dynamically updated.
+ * Instead of enabling/disabling categories, Claude discovers tools via
+ * search_tools (which returns input schemas) and executes them via ghl_execute.
  */
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -11,52 +20,9 @@ const DISCOVERY_TOOL_DEFINITIONS: Tool[] = [
   {
     name: 'list_categories',
     description:
-      'List all available tool categories with descriptions, tool counts, and enabled/disabled status. ' +
-      'Call this first to discover what tools are available before enabling a category.',
-    inputSchema: {
-      type: 'object' as const,
-      properties: {},
-      required: [],
-    },
-  },
-  {
-    name: 'enable_category',
-    description:
-      'Enable a tool category to make its tools available for use. ' +
-      'After enabling, the new tools will appear in your tool list. ' +
-      'Use list_categories first to see available categories.',
-    inputSchema: {
-      type: 'object' as const,
-      properties: {
-        category: {
-          type: 'string',
-          description: 'The category key to enable (e.g. "contacts", "calendar", "conversations")',
-        },
-      },
-      required: ['category'],
-    },
-  },
-  {
-    name: 'disable_category',
-    description:
-      'Disable a tool category to remove its tools from your tool list and free up context space. ' +
-      'Use this when you no longer need a category\'s tools.',
-    inputSchema: {
-      type: 'object' as const,
-      properties: {
-        category: {
-          type: 'string',
-          description: 'The category key to disable',
-        },
-      },
-      required: ['category'],
-    },
-  },
-  {
-    name: 'enable_all_categories',
-    description:
-      'Enable all tool categories at once. WARNING: This exposes all 460+ tools which may use significant context. ' +
-      'Prefer enabling only the categories you need.',
+      'List all available GoHighLevel tool categories with descriptions and tool counts. ' +
+      'Call this first to understand what capabilities are available. ' +
+      'Then use search_tools to find specific tools, and ghl_execute to run them.',
     inputSchema: {
       type: 'object' as const,
       properties: {},
@@ -66,28 +32,44 @@ const DISCOVERY_TOOL_DEFINITIONS: Tool[] = [
   {
     name: 'search_tools',
     description:
-      'Search all tools (both enabled and disabled) by keyword in tool name or description. ' +
-      'Useful for finding which category contains the tool you need.',
+      'Search GoHighLevel tools by keyword. Returns matching tool names, descriptions, and full input schemas. ' +
+      'Use the returned tool name and input schema to call ghl_execute. ' +
+      'Example: search_tools({query: "contact"}) to find contact-related tools.',
     inputSchema: {
       type: 'object' as const,
       properties: {
         query: {
           type: 'string',
-          description: 'Search keyword (e.g. "invoice", "appointment", "send sms")',
+          description: 'Search keyword (e.g. "invoice", "appointment", "send sms", "contact")',
+        },
+        category: {
+          type: 'string',
+          description: 'Optional: filter results to a specific category (e.g. "contacts", "calendar")',
         },
       },
       required: ['query'],
     },
   },
   {
-    name: 'get_enabled_tools',
+    name: 'ghl_execute',
     description:
-      'List all currently enabled tools grouped by category. ' +
-      'Shows what tools are currently available for use.',
+      'Execute any GoHighLevel tool by name. Use search_tools first to discover the tool name and required arguments. ' +
+      'Pass the tool name and its arguments object. ' +
+      'Example: ghl_execute({tool: "create_contact", arguments: {firstName: "John", lastName: "Doe", email: "john@example.com"}})',
     inputSchema: {
       type: 'object' as const,
-      properties: {},
-      required: [],
+      properties: {
+        tool: {
+          type: 'string',
+          description: 'The exact tool name to execute (from search_tools results)',
+        },
+        arguments: {
+          type: 'object',
+          description: 'The arguments to pass to the tool (see input schema from search_tools)',
+          additionalProperties: true,
+        },
+      },
+      required: ['tool', 'arguments'],
     },
   },
 ];
@@ -109,20 +91,17 @@ export class DiscoveryTools {
     return DISCOVERY_TOOL_NAMES.has(name);
   }
 
-  execute(name: string, args: Record<string, unknown>): { content: { type: string; text: string }[] } {
+  async execute(
+    name: string,
+    args: Record<string, unknown>
+  ): Promise<{ content: { type: string; text: string }[] }> {
     switch (name) {
       case 'list_categories':
         return this.listCategories();
-      case 'enable_category':
-        return this.enableCategory(args.category as string);
-      case 'disable_category':
-        return this.disableCategory(args.category as string);
-      case 'enable_all_categories':
-        return this.enableAllCategories();
       case 'search_tools':
-        return this.searchTools(args.query as string);
-      case 'get_enabled_tools':
-        return this.getEnabledTools();
+        return this.searchTools(args.query as string, args.category as string | undefined);
+      case 'ghl_execute':
+        return this.ghlExecute(args.tool as string, (args.arguments as Record<string, unknown>) || {});
       default:
         throw new Error(`Unknown discovery tool: ${name}`);
     }
@@ -131,141 +110,93 @@ export class DiscoveryTools {
   private listCategories() {
     const categories = this.registry.getCategories();
     const total = this.registry.getTotalToolCount();
-    const enabled = this.registry.getEnabledToolCount();
 
     const lines = [
-      `## Tool Categories (${categories.length} categories, ${total} total tools, ${enabled} currently enabled)\n`,
+      `## GoHighLevel Tool Categories (${categories.length} categories, ${total} total tools)\n`,
+      'Use `search_tools` to find specific tools by keyword, then `ghl_execute` to run them.\n',
     ];
 
     for (const cat of categories) {
-      const status = cat.enabled ? '✅ ENABLED' : '⬚ disabled';
-      lines.push(`**${cat.key}** — ${cat.description}`);
-      lines.push(`  ${status} | ${cat.toolCount} tools`);
-      lines.push('');
+      lines.push(`**${cat.key}** — ${cat.description} (${cat.toolCount} tools)`);
     }
 
+    lines.push('');
     lines.push('---');
-    lines.push('Use `enable_category` to enable a category, or `search_tools` to find specific tools.');
+    lines.push('Workflow: search_tools({query: "keyword"}) → ghl_execute({tool: "tool_name", arguments: {...}})');
 
     return { content: [{ type: 'text', text: lines.join('\n') }] };
   }
 
-  private enableCategory(category: string) {
-    if (!category) {
-      return {
-        content: [{ type: 'text', text: 'Error: "category" parameter is required. Use list_categories to see available categories.' }],
-      };
-    }
-
-    try {
-      const result = this.registry.enableCategory(category);
-      const lines = [
-        `✅ Enabled category "${category}" — ${result.count} tools now available:\n`,
-        ...result.enabled.map((name) => `  • ${name}`),
-        '',
-        'These tools are now available for use.',
-      ];
-      return { content: [{ type: 'text', text: lines.join('\n') }] };
-    } catch (err: any) {
-      return { content: [{ type: 'text', text: `Error: ${err.message}` }] };
-    }
-  }
-
-  private disableCategory(category: string) {
-    if (!category) {
-      return {
-        content: [{ type: 'text', text: 'Error: "category" parameter is required. Use list_categories to see available categories.' }],
-      };
-    }
-
-    try {
-      const result = this.registry.disableCategory(category);
-      const lines = [
-        `⬚ Disabled category "${category}" — ${result.count} tools removed.`,
-        'Context space freed up for other tools.',
-      ];
-      return { content: [{ type: 'text', text: lines.join('\n') }] };
-    } catch (err: any) {
-      return { content: [{ type: 'text', text: `Error: ${err.message}` }] };
-    }
-  }
-
-  private enableAllCategories() {
-    const result = this.registry.enableAll();
-    return {
-      content: [{
-        type: 'text',
-        text:
-          `✅ Enabled all categories — ${result.totalEnabled} tools now available.\n\n` +
-          `⚠️  Warning: All tools are now exposed. This uses significant context space. ` +
-          `Consider disabling categories you don't need with disable_category.`,
-      }],
-    };
-  }
-
-  private searchTools(query: string) {
+  private searchTools(query: string, category?: string) {
     if (!query) {
       return {
-        content: [{ type: 'text', text: 'Error: "query" parameter is required.' }],
+        content: [{ type: 'text', text: 'Error: "query" parameter is required. Example: search_tools({query: "contact"})' }],
       };
     }
 
-    const results = this.registry.searchTools(query);
+    let results = this.registry.searchTools(query);
+
+    // Filter by category if provided
+    if (category) {
+      results = results.filter((r) => r.category === category);
+    }
 
     if (results.length === 0) {
       return {
-        content: [{ type: 'text', text: `No tools found matching "${query}". Try a broader search term.` }],
+        content: [{ type: 'text', text: `No tools found matching "${query}"${category ? ` in category "${category}"` : ''}. Try a broader search term.` }],
       };
     }
 
-    const lines = [`## Search results for "${query}" (${results.length} matches)\n`];
+    // Cap at 15 results to keep response manageable
+    const capped = results.slice(0, 15);
+    const lines = [`## Search results for "${query}" (${results.length} match${results.length !== 1 ? 'es' : ''}${results.length > 15 ? ', showing first 15' : ''})\n`];
 
-    // Group by category
-    const byCategory = new Map<string, typeof results>();
-    for (const r of results) {
-      if (!byCategory.has(r.category)) byCategory.set(r.category, []);
-      byCategory.get(r.category)!.push(r);
+    for (const t of capped) {
+      const def = this.registry.getToolDefinition(t.name);
+      lines.push(`### ${t.name}`);
+      lines.push(`Category: ${t.category}`);
+      lines.push(`Description: ${t.description}`);
+      if (def?.inputSchema) {
+        lines.push(`Input Schema: ${JSON.stringify(def.inputSchema)}`);
+      }
+      lines.push(`Execute: ghl_execute({tool: "${t.name}", arguments: {...}})`);
+      lines.push('');
     }
 
-    for (const [cat, tools] of byCategory) {
-      const anyEnabled = tools.some((t) => t.enabled);
-      const status = anyEnabled ? '✅' : '⬚';
-      lines.push(`**${status} ${cat}**`);
-      for (const t of tools) {
-        lines.push(`  • ${t.name} — ${t.description.slice(0, 100)}${t.description.length > 100 ? '…' : ''}`);
-      }
-      if (!anyEnabled) {
-        lines.push(`  → Enable with: enable_category("${cat}")`);
-      }
-      lines.push('');
+    if (results.length > 15) {
+      lines.push(`... and ${results.length - 15} more results. Narrow your search with a more specific query or add a category filter.`);
     }
 
     return { content: [{ type: 'text', text: lines.join('\n') }] };
   }
 
-  private getEnabledTools() {
-    const categories = this.registry.getCategories().filter((c) => c.enabled);
-    const enabledCount = this.registry.getEnabledToolCount();
-
-    if (categories.length === 0) {
+  private async ghlExecute(toolName: string, toolArgs: Record<string, unknown>) {
+    if (!toolName) {
       return {
-        content: [{
-          type: 'text',
-          text: 'No categories are currently enabled. Use list_categories and enable_category to get started.',
-        }],
+        content: [{ type: 'text', text: 'Error: "tool" parameter is required. Use search_tools to find available tools.' }],
       };
     }
 
-    const lines = [`## Currently enabled: ${enabledCount} tools across ${categories.length} categories\n`];
-
-    for (const cat of categories) {
-      lines.push(`**${cat.key}** (${cat.toolCount} tools)`);
-      for (const name of cat.toolNames) {
-        lines.push(`  • ${name}`);
-      }
-      lines.push('');
+    if (!this.registry.hasTool(toolName)) {
+      // Try to suggest similar tools
+      const suggestions = this.registry.searchTools(toolName);
+      const hint = suggestions.length > 0
+        ? ` Did you mean: ${suggestions.slice(0, 5).map((s) => s.name).join(', ')}?`
+        : ' Use search_tools to find available tools.';
+      return {
+        content: [{ type: 'text', text: `Error: Unknown tool "${toolName}".${hint}` }],
+      };
     }
 
-    return { content: [{ type: 'text', text: lines.join('\n') }] };
+    try {
+      const result = await this.registry.executeToolDirect(toolName, toolArgs);
+      return {
+        content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
+      };
+    } catch (error: any) {
+      return {
+        content: [{ type: 'text', text: `Error executing "${toolName}": ${error.message || error}` }],
+      };
+    }
   }
 }

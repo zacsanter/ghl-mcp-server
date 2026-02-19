@@ -1,7 +1,7 @@
 // GoHighLevel MCP Server - Vercel Serverless Handler
-// Uses Streamable HTTP transport with dynamic tool discovery.
-// Only 6 discovery meta-tools are exposed at startup (~2-3K tokens).
-// Users enable tool categories on demand via enable_category / disable_category.
+// Uses Streamable HTTP transport with proxy-based tool discovery.
+// Only 3 meta-tools are exposed: list_categories, search_tools, ghl_execute.
+// Claude discovers tools via search, then executes them through the ghl_execute proxy.
 
 const { Server } = require("@modelcontextprotocol/sdk/server/index.js");
 const { StreamableHTTPServerTransport } = require("@modelcontextprotocol/sdk/server/streamableHttp.js");
@@ -145,7 +145,7 @@ function ensureInitialized() {
   }
 
   console.log(
-    `[GHL MCP Vercel] Initialized: ${registry.getTotalToolCount()} tools across ${CATEGORY_MODULES.length} categories (all disabled — use discovery tools to enable)`
+    `[GHL MCP Vercel] Initialized: ${registry.getTotalToolCount()} tools across ${CATEGORY_MODULES.length} categories (proxy mode via ghl_execute)`
   );
 }
 
@@ -156,49 +156,30 @@ function createMCPServer() {
 
   const server = new Server(
     { name: "ghl-mcp-server", version: "1.0.0" },
-    { capabilities: { tools: { listChanged: true } } }
+    { capabilities: { tools: {} } }
   );
 
-  // List tools: 6 discovery tools + any enabled category tools
+  // List tools: only 3 discovery/proxy tools (list_categories, search_tools, ghl_execute)
   server.setRequestHandler(ListToolsRequestSchema, async () => {
-    const tools = [
-      ...discoveryTools.getDefinitions(),
-      ...registry.getEnabledTools(),
-    ];
-    console.log(
-      `[GHL MCP Vercel] tools/list -> ${tools.length} tools (${registry.getEnabledToolCount()} from registry)`
-    );
+    const tools = discoveryTools.getDefinitions();
+    console.log(`[GHL MCP Vercel] tools/list -> ${tools.length} discovery tools (${registry.getTotalToolCount()} available via ghl_execute)`);
     return { tools };
   });
 
-  // Execute tools: discovery first, then registry
+  // Execute tools: all 3 are discovery tools (ghl_execute proxies to the registry internally)
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { name, arguments: args } = request.params;
     console.log(`[GHL MCP Vercel] Executing tool: ${name}`);
 
     try {
-      // 1. Discovery tools (always available)
       if (discoveryTools.isDiscoveryTool(name)) {
-        return discoveryTools.execute(name, args || {});
+        return await discoveryTools.execute(name, args || {});
       }
-
-      // 2. Registry tools (category must be enabled)
-      if (registry.hasTool(name)) {
-        const result = await registry.executeTool(name, args || {});
-        return {
-          content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
-        };
-      }
-
-      throw new McpError(ErrorCode.InvalidParams, `Unknown tool: ${name}`);
+      throw new McpError(ErrorCode.InvalidParams, `Unknown tool: ${name}. Available tools: list_categories, search_tools, ghl_execute`);
     } catch (error) {
       if (error instanceof McpError) throw error;
       console.error(`[GHL MCP Vercel] Error executing tool ${name}:`, error);
-      const errorCode =
-        error instanceof Error && error.message.includes("404")
-          ? ErrorCode.InvalidRequest
-          : ErrorCode.InternalError;
-      throw new McpError(errorCode, `Tool execution failed: ${error}`);
+      throw new McpError(ErrorCode.InternalError, `Tool execution failed: ${error}`);
     }
   });
 
@@ -228,9 +209,9 @@ module.exports = async (req, res) => {
         server: "ghl-mcp-server",
         version: "1.0.0",
         transport: "streamable-http",
-        discovery: "enabled",
+        mode: "proxy-discovery",
+        discoveryTools: 3,
         totalTools: registry.getTotalToolCount(),
-        enabledTools: registry.getEnabledToolCount(),
         categories: CATEGORY_MODULES.length,
         timestamp: new Date().toISOString(),
       });
